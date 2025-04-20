@@ -25,6 +25,9 @@
     <Compile Update="Pages\ClientPages\ClientPageRecommendations.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ClientPages\ClientPaymentPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ClientPages\ClientProfilePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
