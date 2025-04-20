@@ -1,0 +1,88 @@
+﻿<Page x:Class="fitness_club.Pages.ClientPages.ClientPageRecommendations"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="800"
+      Title="ClientPageRecommendations"
+      Background="white">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch" MaxWidth="800">
+
+            <!-- Заголовок -->
+            <TextBlock Text="Руководство выживания в m1nges Фитнес Клубе" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Foreground="#013878" 
+                       Margin="0 0 0 20"/>
+
+            <!-- Введение -->
+            <TextBlock Text="Вы выбрали путь силы, и теперь вы — почти супергерой. Но даже Бэтмену нужен Альфред. Так что вот вам пара советов, чтобы не сгореть на третий день и не записаться обратно на Netflix и Чипсы." 
+                       FontSize="16" 
+                       TextWrapping="Wrap" 
+                       Margin="0 0 0 20"/>
+
+            <!-- Советы -->
+            <TextBlock Text="Советы от зала (а не из зала):" FontSize="20" FontWeight="SemiBold" Margin="0 0 0 10"/>
+            <ListBox BorderThickness="0" Margin="0 0 0 20">
+                <ListBoxItem>🚿 Душ после тренировки обязателен. Даже если вы и так душка.</ListBoxItem>
+                <ListBoxItem>💧 Вода — ваш фитнес-друг. Нет, кофе не считается.</ListBoxItem>
+                <ListBoxItem>🦴 Сначала разминка, потом подвиги. А то вдруг потянете гордость.</ListBoxItem>
+                <ListBoxItem>🛌 8 часов сна — это не лень, а стратегия восстановления.</ListBoxItem>
+                <ListBoxItem>💪 Нет прогресса без прогресса. Фиксируйте успехи, радуйтесь мелочам.</ListBoxItem>
+            </ListBox>
+
+            <!-- Расписание тренировок -->
+            <TextBlock Text="Тренируемся трижды в неделю. Остальные дни — живём:" FontSize="20" FontWeight="SemiBold" Margin="0 0 0 10"/>
+            <Grid Margin="0 0 0 20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Понедельник:" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Отдыхаем. Психологически готовимся." />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Вторник:" FontWeight="Bold"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Фитнес. Тренер скажет, что легко, но не верьте." />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Среда:" FontWeight="Bold"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Опять отдых. Так и должно быть." />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Четверг:" FontWeight="Bold"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Йога или растяжка. Да, это тоже тренировка." />
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Суббота:" FontWeight="Bold"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="Тренажёрка. Бицепс, трицепс, шейкер в руке." />
+            </Grid>
+
+            <!-- Психология -->
+            <TextBlock Text="Настрой: полусерьёзно, но с душой" FontSize="20" FontWeight="SemiBold" Margin="0 0 0 10"/>
+            <ListBox BorderThickness="0" Margin="0 0 0 20">
+                <ListBoxItem>🙃 У вас уже получилось — вы пришли в зал. Это победа.</ListBoxItem>
+                <ListBoxItem>🤹‍♂️ Никто не смотрит на вас так пристально, как вы сами. Расслабьтесь.</ListBoxItem>
+                <ListBoxItem>🚀 Мотивация — штука приходящая, дисциплина — ваша опора.</ListBoxItem>
+            </ListBox>
+
+            <!-- Благодарность -->
+            <TextBlock Text="Спасибо, что выбрали m1nges Фитнес Клуб!" 
+                       FontSize="18" 
+                       FontWeight="Bold" 
+                       Foreground="#2E8B57" 
+                       Margin="0 20 0 10"/>
+            <TextBlock Text="Удачных вам тренировок, красивых форм и крепких нервов. А мы рядом — и со штангой, и с поддержкой. До встречи в зале!" 
+                       FontSize="16" 
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,41 @@
+﻿<Page x:Class="fitness_club.Pages.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Background="white"
+      Title="ClientPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.3*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <Button Content="Профиль" Margin="10 10 10 10" Click="ProfileBtn_Click"/>
+                <Button Content="Абонементы" Margin="10 0 10 10" Click="MembershipBtn_Click"/>
+                <Button Content="Расписание занятий" Margin="10 0 10 10" Click="SchedulesBtn_Click"/>
+                <Button Content="История посещения занятий" Margin="10 0 10 10" Click="VisitsBtn_Click"/>
+                <Button Content="Услуги" Margin="10 0 10 10" Click="ServicesBtn_Click"/>
+                <Button Content="Советы клиентам" Margin="10 0 10 10" Click="RecommendationBtn_Click"/>
+                <Button Margin="10 0 10 10" Click="EquipmentGuidePageBtn_Click">
+                    <TextBlock TextAlignment="center" Text="Тренажеры и инструкция по эксплуатации" TextWrapping="Wrap"/>
+                </Button>
+                <Button Content="Наши тренеры" Margin="10 0 10 10" Click="TrainersBtn_Click"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">
+                <Button x:Name="logoutBtn" Click="logoutBtn_Click" Content="Выйти из профиля"  VerticalAlignment="Bottom" Margin="10 0 10 10"/>
+                <Button x:Name="exitBtn" Click="exitBtn_Click" Content="Выйти из приложения"  VerticalAlignment="Bottom" Margin="10 0 10 10"/>
+            </StackPanel>
+        </Grid>
+        <Frame x:Name="ClientFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Page>

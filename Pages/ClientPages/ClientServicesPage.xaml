@@ -1,0 +1,290 @@
+﻿<Page x:Class="fitness_club.Pages.ClientPages.ClientServicesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
+      mc:Ignorable="d"
+      Background="white"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientServicesPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="10" Width="Auto">
+            <TextBlock Text="Услуги клуба" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <DatePicker x:Name="pickServiceProvisionDate" Margin="0 0 0 10"/>
+
+            <ListView x:Name="availableServicesList"
+                      MaxHeight="300"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      HorizontalContentAlignment="Stretch"
+                      Margin="0 0 0 10"
+                      SelectionMode="Single">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0 2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="blue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                    <TextBlock Text="{Binding ServiceName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding ServiceType, StringFormat='Тип услуги: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" FontWeight="Bold"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="orderService" Content="Оформить" Click="orderService_Click" Width="150"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="10" Width="Auto">
+            <TextBlock Text="Ваши услуги" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <ComboBox x:Name="servicesHistoryComboBox" HorizontalAlignment="Left" Margin="0 0 0 10" Width="150" Height="20" SelectionChanged="servicesHistoryComboBox_SelectionChanged">
+                <ComboBoxItem Content="Все"/>
+                <ComboBoxItem Content="Использованные"/>
+                <ComboBoxItem Content="Не использованные"/>
+            </ComboBox>
+            <ListView x:Name="servicesHistoryList"
+              MaxHeight="300"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              HorizontalContentAlignment="Stretch"
+              Margin="0 0 0 10"
+              SelectionMode="Single">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0 2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="blue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
+                            <Border.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Отменить запись" Click="CancelServiceClassContext_Click"
+                                            CommandParameter="{Binding ServiceId}" />
+                                </ContextMenu>
+                            </Border.ContextMenu>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                    <TextBlock Text="{Binding ServiceName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding ServiceType, StringFormat='Тип услуги: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding ProvisionDate, StringFormat='Дата оказания услуги: {0:dd.MM.yyyy}'}" Margin="0,2,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" FontWeight="Bold"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10" Width="Auto">
+            <TextBlock Text="Услуги доступные по абонементу" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <DatePicker x:Name="pickServiceDateForMembership" Margin="0 0 0 10"/>
+            <ListView x:Name="servicesAvailableByMembership"
+      MaxHeight="300"
+      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+      HorizontalContentAlignment="Stretch"
+      Margin="0 0 0 10"
+      SelectionMode="Single">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0 2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="blue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                    <TextBlock Text="{Binding ServiceName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding ServiceType, StringFormat='Тип услуги: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding UsageCount, StringFormat='Количество использований: {0}'}" Margin="0,2,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding RemainingCount, StringFormat='Остаток: {0}'}" Margin="0,2,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Button x:Name="useServiceButton" Content="Использовать" Click="useServiceButton_Click" Width="90">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RemainingCount}" Value="0">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Аренда шкафчика" FontSize="16" FontWeight="Bold" Margin="10 0 0 10"/>
+        <StackPanel Visibility="Collapsed" Grid.Row="1" Grid.Column="1" x:Name="userHasRentedLocker" Orientation="Vertical">
+            <TextBlock Text="Номер арендованного ящика: " x:Name="rentedLockerIdTb" FontSize="14" FontWeight="bold" Margin="10 25 0 0"/>
+            <Button Padding="5" x:Name="changeRentedLockerBtn" Content="Изменить арендованный ящик" Click="changeRentedLockerBtn_Click" Width="auto" HorizontalAlignment="left" Margin="10 10 0 0"/>
+        </StackPanel>
+        <StackPanel x:Name="rentLockerSP" Grid.Column="1" Grid.Row="1" Margin="10 30 10 10" Width="Auto">
+            <ComboBox x:Name="lockerZoneComboBox" HorizontalAlignment="Left" Margin="0 0 0 10" Width="150" Height="20" SelectionChanged="lockerZoneComboBox_SelectionChanged"/>
+            <TextBlock Text="Выберите дату окончания аренды" FontSize="10"/>
+            <Grid Margin="0 5 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <DatePicker Grid.Column="0" 
+                x:Name="rentEndDp" 
+                SelectedDateChanged="rentEndDp_SelectionChanged" 
+                Width="150" 
+                HorizontalAlignment="Left"/>
+
+                <Button Grid.Column="2"
+                        x:Name="rentLockerUntilMembershipEnds"
+            Click="rentLockerUntilMembershipEnds_Click" 
+            Width="150" 
+            HorizontalAlignment="Right">
+                    <TextBlock Text="Забронировать ящик до конца абонемента" 
+                   TextWrapping="Wrap" 
+                   TextAlignment="Center"
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <ListView x:Name="availableLockersList"
+                  MaxHeight="220"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Stretch"
+                  SelectionChanged="availableLockersList_SelectionChanged"
+                  Margin="0 0 0 10"
+                  SelectionMode="Single">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0 2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="blue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                    <TextBlock Text="{Binding LockerId}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding LockerZone, StringFormat='Зона шкафчика: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="lockerPriceForPerion" Text="Цена аренды: " Foreground="green"/>
+            <Button x:Name="rentLockerBtn" Content="Арендовать" Click="rentLockerBtn_Click" Width="150"/>
+        </StackPanel>
+    </Grid>
+</Page>

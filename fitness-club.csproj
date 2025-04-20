@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>fitness_club</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\ellipse.jpg" />
+    <None Remove="Images\treadmill.jpg" />
+    <None Remove="Images\верхний блок.jpg" />
+    <None Remove="Images\гребной.jpg" />
+    <None Remove="Images\жим нгогами.jpg" />
+    <None Remove="Images\жим.jpg" />
+    <None Remove="Images\прессмашина.jpg" />
+    <None Remove="Images\разведение рук в кроссовере.jpg" />
+    <None Remove="Images\сгибаниеног.jpg" />
+    <None Remove="Images\шут.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\TrainerPages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageReference Include="QRCoder" Version="1.6.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ellipse.jpg" />
+    <Resource Include="Images\treadmill.jpg" />
+    <Resource Include="Images\верхний блок.jpg" />
+    <Resource Include="Images\гребной.jpg" />
+    <Resource Include="Images\жим нгогами.jpg" />
+    <Resource Include="Images\жим.jpg" />
+    <Resource Include="Images\прессмашина.jpg" />
+    <Resource Include="Images\разведение рук в кроссовере.jpg" />
+    <Resource Include="Images\сгибаниеног.jpg" />
+    <Resource Include="Images\шут.png" />
+  </ItemGroup>
+
+</Project>

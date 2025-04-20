@@ -1,0 +1,193 @@
+﻿<Window x:Class="fitness_club.Windows.RegistrationWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:fitness_club.Windows"
+        mc:Ignorable="d"
+        Title="RegistrationWin" Height="950" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="3"
+        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock TextAlignment="Center" 
+               Text="Регистрация" 
+               FontSize="20"
+               FontWeight="Bold"
+               Margin="0 20 0 0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+            <TextBlock TextAlignment="Center"
+               Margin="0 5 0 10"
+               Text="Введите имя" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="firstNameTb"
+               Width="190" 
+               Height="30"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Введите фамилию" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="lastNameTb"
+               Width="190" 
+               Height="30"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Введите отчество" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="patronymicTb"
+               Margin="0 0 0 5"
+               Width="190" 
+               Height="30"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Введите email" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="emailTb"
+               Width="190" 
+               Height="30"
+               Margin="0 0 0 5"/>
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Введите телефон" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+           
+            <TextBox x:Name="phoneTb"
+               Width="190" 
+               Height="30"
+               Margin="0 0 0 5"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Пол" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <ComboBox x:Name="genderCmb"
+               Width="190" 
+               Height="30">
+                <ComboBoxItem Content="Мужчина"/>
+                <ComboBoxItem Content="Женщина"/>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <TextBlock TextAlignment="Center"
+               Margin="0 5 0 10"
+               Text="Дата рождения" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <DatePicker x:Name="dateOfBirthDp"
+               Width="190" 
+               Height="30"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Серия паспорта" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="passportSeriesTb"
+               Width="190" 
+               Height="30"
+               Margin="0 0 0 5"/>
+            
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Номер паспорта" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="passportNumberTb"
+               Width="190" 
+               Height="30"
+               Margin="0 0 0 5"/>
+            
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Кем выдан паспорт" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <TextBox x:Name="passportKemVidanTb"
+               Width="190" 
+               Height="30"
+               Margin="0 0 0 5"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Когда выдан паспорт" 
+               FontSize="18"        
+               Width="190"
+               Height="30"/>
+
+            <DatePicker x:Name="dateOfPassportVidanDp"
+               Width="190" 
+               Height="30"/>
+
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="Вы - клиент или тренер?" 
+               FontSize="18"        
+               Width="210"
+               Height="30"/>
+
+            <ComboBox x:Name="trainerOrClientCmb"
+               Width="190" 
+               Height="30">
+                <ComboBoxItem Content="Тренер"/>
+                <ComboBoxItem Content="Клиент"/>
+            </ComboBox>
+
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <TextBlock TextAlignment="Center"
+               Margin="0 15 0 10"
+               Text="*Внимательно вводите почту. При регистрации на нее будут высланы пароль и логин для авторизации" 
+               FontSize="14"
+               Width="250"
+               TextWrapping="Wrap"
+               TextTrimming="None"/>
+            <Button x:Name="registrationBtn"
+               Content="Зарегистрироваться"
+               Width="190"
+               VerticalAlignment="Top"
+               FontSize="18"
+               Height="30"
+               Click="registrationBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,127 @@
+﻿<Page x:Class="fitness_club.Pages.ClientPages.ClientEquipmentGuidePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientEquipmentGuidePage">
+
+    <ScrollViewer
+              Background="White"
+              Padding="20"
+              VerticalScrollBarVisibility="Auto">
+
+        <StackPanel>
+
+            <TextBlock Text="Наше оборудование и инструкция его использования"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Margin="0 0 0 20"
+                   TextAlignment="Center"/>
+
+            <!-- Карточка 1 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Беговая дорожка" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/treadmill.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: ноги, ягодицы, сердечно-сосудистая система"/>
+                    <TextBlock Text="Инструкция: Встаньте на беговую дорожку, выберите режим и начните ходьбу или бег. Не забывайте держаться за поручни в начале." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 2 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Эллиптический тренажёр" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/ellipse.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: ноги, ягодицы, руки"/>
+                    <TextBlock Text="Инструкция: Встаньте на платформы, возьмитесь за рукоятки и начинайте плавно двигаться, имитируя ходьбу по лестнице." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 3 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Скамья для жима лёжа" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/жим.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: грудные, трицепсы, плечи"/>
+                    <TextBlock Text="Инструкция: Лягте на скамью, возьмитесь за штангу, плавно опустите её к груди и выжмите вверх. Всегда работайте с напарником или подстраховкой!" TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 4 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Тяга верхнего блока" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/верхний блок.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: широчайшие, бицепсы"/>
+                    <TextBlock Text="Инструкция: Сядьте, зафиксируйте ноги, возьмитесь за рукоятку и тяните её к груди. Спина прямая!" TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 5 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Жим ногами" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/жим нгогами.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: квадрицепсы, ягодицы, икры"/>
+                    <TextBlock Text="Инструкция: Сядьте, поставьте ноги на платформу, плавно выжимайте её, не выпрямляя колени полностью." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 6 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Гребной тренажёр" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/гребной.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: спина, бицепсы, ноги, пресс"/>
+                    <TextBlock Text="Инструкция: Сядьте, зафиксируйте ноги, возьмитесь за ручку. Тяните ручку к животу, разгибая ноги, затем вернитесь в исходное положение." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 7 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Сгибание ног лёжа" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/сгибаниеног.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: бицепс бедра"/>
+                    <TextBlock Text="Инструкция: Лягте лицом вниз, зафиксируйте ноги под валиком, сгибайте ноги, удерживая нагрузку." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 8 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Разведение рук в кроссовере" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/разведение рук в кроссовере.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: грудные, плечи"/>
+                    <TextBlock Text="Инструкция: Встаньте по центру, возьмитесь за ручки, слегка наклонитесь вперёд и сводите руки перед собой, слегка сгибая локти." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 9 -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="0 0 0 15" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="Пресс-машина" FontSize="18" FontWeight="Bold"/>
+                    <Image Source="../../Images/прессмашина.jpg" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: пресс"/>
+                    <TextBlock Text="Инструкция: Сядьте, зафиксируйте руки или плечи, выполняйте скручивание корпуса, сокращая мышцы живота." TextWrapping="Wrap" Margin="0 5 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Карточка 10 -->
+            <Border BorderBrush="DarkRed" BorderThickness="2" CornerRadius="10" Margin="0 0 0 15" Padding="15" Background="#FFF9F9F9">
+                <StackPanel>
+                    <TextBlock Text="Гиперболический качель-тренажёр 3000" FontSize="18" FontWeight="Bold" Foreground="DarkRed"/>
+                    <Image Source="../../Images/шут.png" Height="200" Margin="0 10"/>
+                    <TextBlock Text="Группы мышц: все и сразу (или ни одной — зависит от фазы Луны)"/>
+                    <TextBlock Text="Инструкция: Сначала найдите инструктора, шамана и инженерный диплом. Затем — отплясывайте вокруг тренажёра ровно 3 минуты. Эффект будет… ну какой-то точно будет." TextWrapping="Wrap" Margin="0 5 0 0" FontStyle="Italic" Foreground="DarkRed"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

@@ -1,0 +1,84 @@
+﻿<Page x:Class="fitness_club.Pages.ClientPages.ClientProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="433.558" d:DesignWidth="800"
+      Background="white"
+      Title="ClientProfilePage">
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Профиль клиента" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
+                <!-- Левая колонка -->
+                <StackPanel Grid.Column="0" Grid.Row="1" Margin="0 0 20 0">
+                    <TextBlock Text="Фамилия:" FontWeight="Bold"/>
+                    <TextBox x:Name="LastNameTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Имя:" FontWeight="Bold"/>
+                    <TextBox x:Name="FirstNameTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Отчество:" FontWeight="Bold"/>
+                    <TextBox x:Name="PatronymicTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Пол:" FontWeight="Bold"/>
+                    <TextBox x:Name="GenderTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Дата рождения:" FontWeight="Bold"/>
+                    <TextBox x:Name="BirthDateTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Кем выдан паспорт:" FontWeight="Bold"/>
+                    <TextBox x:Name="KemVidanTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Когда выдан паспорт:" FontWeight="Bold"/>
+                    <TextBox x:Name="KogdaVidanTb" IsEnabled="False" Margin="0 0 0 10"/>
+                    <CheckBox x:Name="addAuthorNameCb" Content="Отображать мое имя в отзывах" IsChecked="True" Margin="0 0 0 10"/>
+                </StackPanel>
+
+                <!-- Правая колонка -->
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <TextBlock Text="Серия паспорта:" FontWeight="Bold"/>
+                    <TextBox x:Name="PassportSeriesTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Номер паспорта:" FontWeight="Bold"/>
+                    <TextBox x:Name="PassportNumberTb" IsEnabled="False" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Телефон:" FontWeight="Bold"/>
+                    <TextBox x:Name="PhoneTb" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Email:" FontWeight="Bold"/>
+                    <TextBox x:Name="EmailTb" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Логин:" FontWeight="Bold"/>
+                    <TextBox x:Name="LoginTb" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Новый пароль:" FontWeight="Bold"/>
+                    <PasswordBox x:Name="NewPasswordPb" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Повторите пароль:" FontWeight="Bold"/>
+                    <PasswordBox x:Name="RepeatPasswordPb" Margin="0 0 0 10"/>
+
+                    <TextBlock Text="Роль:" FontWeight="Bold"/>
+                    <TextBox x:Name="RoleTb" IsEnabled="False" Margin="0 0 0 10"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                    <Button Content="Сохранить изменения" Click="SaveChanges_Click" Width="250"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
