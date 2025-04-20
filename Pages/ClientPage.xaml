@@ -30,6 +30,7 @@
                     <TextBlock TextAlignment="center" Text="Тренажеры и инструкция по эксплуатации" TextWrapping="Wrap"/>
                 </Button>
                 <Button Content="Наши тренеры" Margin="10 0 10 10" Click="TrainersBtn_Click"/>
+                <Button Content="Страница оплаты" Margin="10 0 10 10" Click="PaymentBtn_Click"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">
                 <Button x:Name="logoutBtn" Click="logoutBtn_Click" Content="Выйти из профиля"  VerticalAlignment="Bottom" Margin="10 0 10 10"/>

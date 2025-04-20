@@ -189,7 +189,7 @@ namespace fitness_club.Pages.ClientPages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/fitness-club;V1.0.0.0;component/pages/clientpages/clientservicespage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/fitness-club;component/pages/clientpages/clientservicespage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Pages\ClientPages\ClientServicesPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -83,5 +83,10 @@ namespace fitness_club.Pages
         {
             ClientFrame.Navigate(new ClientTrainerListPage());
         }
+
+        private void PaymentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ClientFrame.Navigate(new ClientPaymentPage());
+        }
     }
 }

@@ -26,10 +26,14 @@ namespace fitness_club.Pages.ClientPages
 {
     public partial class PaymentWindow : Window
     {
-        DateTime today = DateTime.SpecifyKind(DateTime.Today, DateTimeKind.Utc);
-        public PaymentWindow()
+        public bool PaymentSuccess { get; private set; } = false;
+        string paymentType;
+        int paymentSum;
+        public PaymentWindow(string paymentType, int paymentSum)
         {
             InitializeComponent();
+            this.paymentType = paymentType;
+            this.paymentSum = paymentSum;
         }
 
         private string GenerateRandomString()
@@ -103,63 +107,7 @@ namespace fitness_club.Pages.ClientPages
             GenerateRandomQrCode();
         }
 
-        //public void SuccessfullPayment(int membershipId)
-        //{
-        //    MessageBoxResult result = MessageBox.Show(
-        //                    "Вы успешно оплатили абонемент!",
-        //                    "Успех",
-        //                    MessageBoxButton.OK,
-        //                    MessageBoxImage.Information);
-
-        //    if (result == MessageBoxResult.OK)
-        //    {
-        //        using (var db = new AppDbContext())
-        //        {
-        //            var currentClientMembership = db.ClientMemberships
-        //                .Where(cm => cm.ClientId == AuthorizationWin.currentUser.Client.ClientId &&
-        //                                      cm.EndDate >= today)
-        //                .OrderByDescending(cm => cm.EndDate)
-        //                .FirstOrDefault();
-
-        //            var membership = db.Memberships
-        //                .FirstOrDefault(m => m.MembershipId == membershipId);
-
-        //            int? membershipDuration = db.MembershipTypes.Where(mt => membership.MembershipTypeId == mt.MembershipTypeId).Select(mt => mt.DurationMonths).FirstOrDefault();
-        //            if (currentClientMembership == null)
-        //            {
-
-        //                var newClientMembership = new ClientMembership
-        //                {
-        //                    MembershipId = membershipId,
-        //                    ClientId = AuthorizationWin.currentUser.Client.ClientId,
-        //                    StartDate = today,
-        //                    EndDate = today.AddMonths((int)membershipDuration)
-        //                };
-        //                db.ClientMemberships.Add(newClientMembership);
-        //                db.SaveChanges();
-
-        //            }
-        //            else
-        //            {
-        //                var newClientMembership = new ClientMembership
-        //                {
-        //                    MembershipId = membershipId,
-        //                    ClientId = AuthorizationWin.currentUser.Client.ClientId,
-        //                    StartDate = DateTime.SpecifyKind(currentClientMembership.EndDate.AddDays(1), DateTimeKind.Utc),
-        //                    EndDate = DateTime.SpecifyKind(
-        //                    currentClientMembership.EndDate.AddDays(1).AddMonths((int)membershipDuration),
-        //                    DateTimeKind.Utc)
-        //                };
-
-        //                db.ClientMemberships.Add(newClientMembership);
-        //                db.SaveChanges();
-        //            }
-
-        //        }
-        //        this.Close();
-        //    }
-        //}
-
+        
         private void payBtn_Click(object sender, RoutedEventArgs e)
         {
             if(cardRb.IsChecked == true)
@@ -177,7 +125,17 @@ namespace fitness_club.Pages.ClientPages
                         {
                             if (cvvTb.Text.Length == 3 && int.TryParse(cvvTb.Text, out int cvv) && cvv >= 1 && cvv <= 999)
                             {
-                                //SuccessfullPayment();
+                                MessageBoxResult result = MessageBox.Show(
+                                    $"Вы успешно оплатили {paymentType}!",
+                                    "Успех",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information);
+                                if(result == MessageBoxResult.OK)
+                                {
+                                    PaymentSuccess = true;
+                                    this.DialogResult = true;
+                                    this.Close();
+                                }
                             }
                             else
                             {
@@ -193,7 +151,17 @@ namespace fitness_club.Pages.ClientPages
             }
             else if(qrCodeRb.IsChecked == true)
             {
-                //SuccessfullPayment();
+                MessageBoxResult result = MessageBox.Show(
+                                    $"Вы успешно оплатили {paymentType}!",
+                                    "Успех",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information);
+                if (result == MessageBoxResult.OK)
+                {
+                    PaymentSuccess = true;
+                    this.DialogResult = true;
+                    this.Close();
+                }
             }
             else
             {
@@ -264,14 +232,14 @@ namespace fitness_club.Pages.ClientPages
                     payByQRCodeSp.Visibility = Visibility.Collapsed;
                     payByCardSp.Visibility = Visibility.Visible;
                     payBtn.Visibility = Visibility.Visible;
-                    payBtn.Content = $"Оплатить  руб.";
+                    payBtn.Content = $"Оплатить {paymentSum} руб.";
                     break;
                 case "qrCodeRb":
                     payByCardSp.Visibility = Visibility.Collapsed;
                     GenerateRandomQrCode();
                     payByQRCodeSp.Visibility = Visibility.Visible;
                     payBtn.Visibility = Visibility.Visible;
-                    payBtn.Content = $"Я оплатил  руб.";
+                    payBtn.Content = $"Я оплатил {paymentSum} руб.";
                     break;
             }
         }
