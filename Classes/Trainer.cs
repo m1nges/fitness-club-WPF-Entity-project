@@ -68,7 +68,7 @@ namespace fitness_club.Classes
 
         [ForeignKey("Specialization")]
         [Column("specialization_id")]
-        public int SpecializationId { get; set; }
+        public int? SpecializationId { get; set; }
         public virtual Specialization Specialization { get; set; }
 
         public virtual ICollection<WorkSchedule> WorkSchedules { get; set; }

@@ -29,11 +29,21 @@ namespace fitness_club.Windows
         public RegistrationWin()
         {
             InitializeComponent();
+            secretCodeTrainerSp.Visibility = Visibility.Collapsed;
         }
+
+        private void trainerOrClientCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (trainerOrClientCmb.SelectedIndex == 0)
+                secretCodeTrainerSp.Visibility = Visibility.Visible;
+            else
+                secretCodeTrainerSp.Visibility = Visibility.Collapsed;
+        }
+
 
         private void registrationBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка на пустые поля
+            // Общая валидация формы
             if (string.IsNullOrWhiteSpace(firstNameTb.Text) ||
                 string.IsNullOrWhiteSpace(lastNameTb.Text) ||
                 string.IsNullOrWhiteSpace(emailTb.Text) ||
@@ -49,82 +59,92 @@ namespace fitness_club.Windows
                 return;
             }
 
-
-            //Проверка email с помощью RegularExpressions
             string email = emailTb.Text.ToLower();
             Regex emailRegex = new Regex("^[a-z0-9]+@[a-z0-9]+\\.[a-z]+$");
 
             if (!emailRegex.IsMatch(email))
             {
-                MessageBox.Show("Введите корректный email (например: ivanovivan@mail.ru)");
+                MessageBox.Show("Введите корректный email");
                 return;
             }
 
-
-            // Проверка возраста
             var birthDate = dateOfBirthDp.SelectedDate.Value;
-            var age = DateTime.Now.Year - birthDate.Year;
-            if (birthDate > DateTime.Now.AddYears(-age)) age--; // корректировка на месяц/день
+            int age = DateTime.Now.Year - birthDate.Year;
+            if (birthDate > DateTime.Now.AddYears(-age)) age--;
 
             if (age < 14)
             {
-                MessageBox.Show("Возраст клиента должен быть от 14");
+                MessageBox.Show("Возраст должен быть не менее 14 лет");
                 return;
             }
 
-            //Проверка телефона
-            string phone = phoneTb.Text.Trim();
-            phone = phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+            string phone = phoneTb.Text.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
             if (!(Regex.IsMatch(phone, @"^\+7\d{10}$") || Regex.IsMatch(phone, @"^8\d{10}$")))
             {
-                MessageBox.Show("Введите номер телефона в формате +7XXXXXXXXXX или 8XXXXXXXXXX");
+                MessageBox.Show("Введите корректный номер телефона");
                 return;
             }
 
-            // Проверка паспорта
             if (!int.TryParse(passportSeriesTb.Text, out _) || passportSeriesTb.Text.Length != 4 ||
                 !int.TryParse(passportNumberTb.Text, out _) || passportNumberTb.Text.Length != 6)
             {
-                MessageBox.Show("Введите корректные паспортные данные (серия: 4 цифры, номер: 6 цифр).");
+                MessageBox.Show("Некорректные паспортные данные");
                 return;
             }
 
-
             password = GeneratePassword();
             login = GeneratePassword();
-            //Проверка пароля
-            bool rez = ufDb.CheckPassword(password);
-            if (!rez) return;
+
+            if (!ufDb.CheckPassword(password) || !ufDb.CheckUser(login))
+                return;
+
+            int roleId = trainerOrClientCmb.SelectedIndex == 0 ? 1 : 2;
+            string genderId = genderCmb.SelectedIndex == 0 ? "Me" : "Fe";
+
+            // Проверка тренера
+            if (roleId == 1)
+            {
+                if (codeWordTb.Text.Trim() != "iamtruetrainer")
+                {
+                    MessageBox.Show("Неверное кодовое слово для регистрации тренера!");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        ufDb.AddTrainerAndUpdateUser(
+                            login, password, roleId,
+                            lastNameTb.Text, firstNameTb.Text, patronymicTb.Text,
+                            birthDate, phone, email, genderId,
+                            passportSeriesTb.Text, passportNumberTb.Text,
+                            passportKemVidanTb.Text, dateOfPassportVidanDp.SelectedDate ?? DateTime.Now
+                        );
+                        SendMail();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        var inner = ex.InnerException?.Message ?? "Нет деталей";
+                        throw new Exception($"Ошибка при добавлении клиента: {ex.Message}\nINNER: {inner}");
+                    }
+                }
+
+            }
             else
             {
-                if (ufDb.CheckUser(login))
-                {
-                    //Вызываем метод добавления клиента и автоматического создания пользователя
-                    ufDb.AddClientAndUpdateUser
-                    (   
-                        login, 
-                        password,
-                        trainerOrClientCmb.SelectedIndex == 0 ? 1 : 2,
-                        lastNameTb.Text,
-                        firstNameTb.Text,
-                        patronymicTb.Text,
-                        dateOfBirthDp.SelectedDate ?? DateTime.Now,
-                        phoneTb.Text,
-                        emailTb.Text,
-                        genderCmb.SelectedIndex == 0 ? "Me" : "Fe", // Предполагаем, что 0 - мужчина, 1 - женщина
-                        passportSeriesTb.Text,
-                        passportNumberTb.Text,
-                        passportKemVidanTb.Text,
-                        dateOfPassportVidanDp.SelectedDate ?? DateTime.Now
-                    );
-                }
-                else return;
+                ufDb.AddClientAndUpdateUser(
+                    login, password, roleId,
+                    lastNameTb.Text, firstNameTb.Text, patronymicTb.Text,
+                    birthDate, phone, email, genderId,
+                    passportSeriesTb.Text, passportNumberTb.Text,
+                    passportKemVidanTb.Text, dateOfPassportVidanDp.SelectedDate ?? DateTime.Now
+                );
+                SendMail();
+                this.Close();
             }
-            SendMail();
-            AuthorizationWin authWin = new AuthorizationWin();
-            authWin.Show();
-            this.Close();
         }
+
 
         public static string GeneratePassword()
         {

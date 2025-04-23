@@ -8,9 +8,9 @@
         Title="RegistrationWin" Height="950" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -121,6 +121,7 @@
             <TextBox x:Name="passportSeriesTb"
                Width="190" 
                Height="30"
+               MaxLength="4"
                Margin="0 0 0 5"/>
             
             <TextBlock TextAlignment="Center"
@@ -133,6 +134,7 @@
             <TextBox x:Name="passportNumberTb"
                Width="190" 
                Height="30"
+               MaxLength="6"
                Margin="0 0 0 5"/>
             
             <TextBlock TextAlignment="Center"
@@ -166,11 +168,27 @@
                Height="30"/>
 
             <ComboBox x:Name="trainerOrClientCmb"
+               SelectionChanged="trainerOrClientCmb_SelectionChanged"
                Width="190" 
                Height="30">
                 <ComboBoxItem Content="Тренер"/>
                 <ComboBoxItem Content="Клиент"/>
             </ComboBox>
+
+            <StackPanel x:Name="secretCodeTrainerSp">
+                <TextBlock TextAlignment="Center"
+                           Margin="0 15 0 10"
+                           Text="Введите кодовое слово" 
+                           FontSize="18"        
+                           Width="190"
+                           Height="50"
+                           TextWrapping="Wrap"/>
+                <TextBox x:Name="codeWordTb" 
+                         Width="190" 
+                         Height="30"
+                         Margin="0 0 0 5"/>
+            </StackPanel>
+            
 
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2">

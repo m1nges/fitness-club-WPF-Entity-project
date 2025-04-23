@@ -41,6 +41,73 @@ namespace fitness_club.Model
             return true;
         }
 
+        public void AddTrainerAndUpdateUser(
+                string login,
+                string password,
+                int roleId,
+                string lastName,
+                string firstName,
+                string patronymic,
+                DateTime birthDate,
+                string phoneNumber,
+                string email,
+                string genderId,
+                string passportSeries,
+                string passportNumber,
+                string passportKemVidan,
+                DateTime passportKogdaVidan)
+        {
+            using (var db = new AppDbContext())
+            {
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Создаём пользователя
+                        var user = new Users
+                        {
+                            Login = login,
+                            Password = Verification.GetSHA512Hash(password),
+                            RoleId = roleId
+                        };
+                        db.Users.Add(user);
+                        db.SaveChanges(); // чтобы получить user.UserId
+
+                        // 2. Создаём тренера
+                        var trainer = new Trainer
+                        {
+                            LastName = lastName,
+                            FirstName = firstName,
+                            Patronymic = patronymic,
+                            BirthDate = birthDate,
+                            PhoneNumber = phoneNumber,
+                            Email = email,
+                            GenderId = genderId,
+                            PassportSeries = passportSeries,
+                            PassportNumber = passportNumber,
+                            PassportKemVidan = passportKemVidan,
+                            PassportKogdaVidan = passportKogdaVidan,
+                            DateOfEmployment = DateTime.Today,
+                            SpecializationId = 1, // или выбрать из UI
+                            UserId = user.UserId
+                        };
+                        db.Trainers.Add(trainer);
+                        db.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        string inner = ex.InnerException?.Message ?? "Нет деталей";
+                        throw new Exception($"Ошибка при добавлении тренера: {ex.Message}\nINNER: {inner}");
+                    }
+                }
+            }
+        }
+
+
+
         public bool CheckUser(string login)
         {
             using (var db = new AppDbContext())

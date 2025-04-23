@@ -16,5 +16,5 @@ E:\fitness-club\App.xaml
 2151505819001
 MainWindow.xaml;Pages\AdminPage.xaml;Pages\ClientPage.xaml;Pages\ClientPages\ClassDetailsWindow.xaml;Pages\ClientPages\ClientEquipmentGuidePage.xaml;Pages\ClientPages\ClientMembershipPage.xaml;Pages\ClientPages\ClientPageRecommendations.xaml;Pages\ClientPages\ClientPaymentPage.xaml;Pages\ClientPages\ClientProfilePage.xaml;Pages\ClientPages\ClientSchedulePage.xaml;Pages\ClientPages\ClientServicesPage.xaml;Pages\ClientPages\ClientTrainerDetailsWindow.xaml;Pages\ClientPages\ClientTrainerListPage.xaml;Pages\ClientPages\ClientVisitsPage.xaml;Pages\ClientPages\PaymentWindow.xaml;Pages\TrainerPage.xaml;Windows\AuthorizationWin.xaml;Windows\RegistrationWin.xaml;
 
-False
+True
 
