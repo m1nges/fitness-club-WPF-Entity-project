@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JhSOLRyTEFQ=",
+  "dgSpecHash": "9QHk9vOl42U=",
   "success": true,
-  "projectFilePath": "E:\\YandexDisk\\study\\3rd-curs\\Курсовая\\fitness-club\\fitness-club.csproj",
+  "projectFilePath": "E:\\fitness-club\\fitness-club.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\egor\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\egor\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

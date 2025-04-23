@@ -328,7 +328,7 @@ namespace fitness_club.Pages.ClientPages
                 var combined = paidOnly
                     .Concat(exhaustedFreeServices)
                     .OrderBy(s => s.ServiceType)
-                    .ThenBy(s => s.ServiceName) // для красоты
+                    .ThenBy(s => s.ServiceName)
                     .ToList();
 
                 availableServicesList.ItemsSource = combined;
@@ -544,7 +544,7 @@ namespace fitness_club.Pages.ClientPages
                                 db.MembershipServices.Remove(membershipServices);
                                 db.SaveChanges();
                                 LoadClientsServices(servicesHistoryComboBox.SelectedIndex);
-                                MessageBox.Show("Запись на занятие успешно отменена.", "Успех",
+                                MessageBox.Show("Услуга успешно отменена.", "Успех",
                                     MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                         }

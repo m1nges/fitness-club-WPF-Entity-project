@@ -3094,11 +3094,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\YandexDisk\\study\\3rd-curs\\Курсовая\\fitness-club\\fitness-club.csproj",
+      "projectUniqueName": "E:\\fitness-club\\fitness-club.csproj",
       "projectName": "fitness-club",
-      "projectPath": "E:\\YandexDisk\\study\\3rd-curs\\Курсовая\\fitness-club\\fitness-club.csproj",
+      "projectPath": "E:\\fitness-club\\fitness-club.csproj",
       "packagesPath": "C:\\Users\\egor\\.nuget\\packages\\",
-      "outputPath": "E:\\YandexDisk\\study\\3rd-curs\\Курсовая\\fitness-club\\obj\\",
+      "outputPath": "E:\\fitness-club\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Apps\\VisualStudio\\Shared\\NuGetPackages"
