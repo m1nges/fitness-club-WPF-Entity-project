@@ -52,6 +52,12 @@
     <Compile Update="Pages\TrainerPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\TrainerPages\TrainerProfilePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\TrainerPages\TrainerReviewsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\AuthorizationWin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

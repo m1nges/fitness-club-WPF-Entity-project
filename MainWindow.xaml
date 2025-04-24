@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="MainWindow" d:DesignHeight="810.383" d:DesignWidth="745.545" MaxWidth="1200"
+        Title="MainWindow" d:DesignHeight="810.383" d:DesignWidth="745.545" MaxWidth="1250"
         MaxHeight="900">
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>

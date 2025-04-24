@@ -136,9 +136,8 @@ namespace fitness_club.Model
             {
                 try
                 {
-                    // Ищем пользователя по логину и сразу подгружаем клиента
+
                     var user = db.Users
-                        .Include(u => u.Client)
                         .FirstOrDefault(u => u.Login == login);
 
                     if (user == null)
@@ -154,7 +153,26 @@ namespace fitness_club.Model
                         return null;
                     }
 
-                    return user;
+                    if (user.RoleId == 1)
+                    {
+                        var trainer = db.Users
+                            .Include(u => u.Trainer)
+                            .FirstOrDefault(u => u.Login == login);
+                        return trainer;
+                    }
+
+                    else if (user.RoleId == 2)
+                    {
+                        var client = db.Users
+                            .Include(u => u.Client)
+                            .FirstOrDefault(u => u.Login == login);
+                        return client;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Some shit happened");
+                        return null;
+                    }
                 }
                 catch (Exception ex)
                 {

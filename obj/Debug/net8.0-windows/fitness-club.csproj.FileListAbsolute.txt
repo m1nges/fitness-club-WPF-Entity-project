@@ -602,3 +602,7 @@ E:\fitness-club\obj\Debug\net8.0-windows\fitness-club.sourcelink.json
 E:\fitness-club\obj\Debug\net8.0-windows\fitness-.9ADE7CAB.Up2Date
 E:\fitness-club\obj\Debug\net8.0-windows\fitness-club.genruntimeconfig.cache
 E:\fitness-club\obj\Debug\net8.0-windows\ref\fitness-club.dll
+E:\fitness-club\obj\Debug\net8.0-windows\Pages\TrainerPages\TrainerProfilePage.g.cs
+E:\fitness-club\obj\Debug\net8.0-windows\Pages\TrainerPages\TrainerProfilePage.baml
+E:\fitness-club\obj\Debug\net8.0-windows\Pages\TrainerPages\TrainerReviewsPage.g.cs
+E:\fitness-club\obj\Debug\net8.0-windows\Pages\TrainerPages\TrainerReviewsPage.baml

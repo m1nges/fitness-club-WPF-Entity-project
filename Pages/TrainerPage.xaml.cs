@@ -1,4 +1,7 @@
-﻿using System;
+﻿using fitness_club.Classes;
+using fitness_club.Pages.TrainerPages;
+using fitness_club.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,45 @@ namespace fitness_club.Pages
         public TrainerPage()
         {
             InitializeComponent();
+            FrameClass.TrainerInnerFrame = TrainerFrame;
+            TrainerFrame.Navigate(new TrainerProfilePage());
+            userName.Text = AuthorizationWin.currentUser.Trainer.LastName + " " +
+                AuthorizationWin.currentUser.Trainer.FirstName + " " +
+                AuthorizationWin.currentUser.Trainer.Patronymic;
+        }
+
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TrainerFrame.Navigate(new TrainerProfilePage());
+        }
+
+        private void ReviewsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TrainerFrame.Navigate(new TrainerReviewsPage());
+        }
+
+        private void SchedulesBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void VisitsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorizationWin.currentUser = null;
+            AuthorizationWin authWin = new AuthorizationWin();
+            authWin.Show();
+            var window = Window.GetWindow(this);
+            window?.Close();
         }
     }
 }

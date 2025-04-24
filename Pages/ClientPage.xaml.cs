@@ -28,6 +28,9 @@ namespace fitness_club.Pages
             InitializeComponent();
             FrameClass.ClientInnerFrame = ClientFrame;
             ClientFrame.Navigate(new ClientSchedulePage());
+            userName.Text = AuthorizationWin.currentUser.Client.LastName + " " +
+                AuthorizationWin.currentUser.Client.FirstName + " " +
+                AuthorizationWin.currentUser.Client.Patronymic;
         }
 
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)

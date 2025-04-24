@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical">
             <TextBlock Text="Ваш тренер: " FontSize="16" FontWeight="Bold" x:Name="fullNameOfTrainerTb" Margin="10 0 10 0"/>
-            <Image x:Name="trainerPhoto" Width="150" Height="150" Margin="10 15 10 0"/>
+            <Image x:Name="trainerPhoto" Width="150" Height="200" Stretch="Fill" Margin="10 15 10 0"/>
             <TextBlock Text="Специализация тренера:" x:Name="trainerSpecializationTb" FontSize="14" Margin="10 15 10 0"/>
             <TextBlock Text="Стаж работы тренера:" x:Name="trainerExperienceTb" FontSize="14" Margin="10 15 10 0"/>
         </StackPanel>

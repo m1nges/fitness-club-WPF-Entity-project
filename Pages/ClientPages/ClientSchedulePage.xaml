@@ -28,7 +28,7 @@
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
                 <TextBlock Text="Мои индивидуальные занятия" FontWeight="Bold" Margin="0 0 0 5"/>
 
-                <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <ListView x:Name="AuthorizedIndividualList" SelectionMode="Single" MouseDoubleClick="AuthorizedIndividualList_MouseDoubleClick">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
@@ -72,7 +72,7 @@
             </StackPanel>
 
             <!-- Групповые занятия -->
-            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MinHeight="200" Margin="5">
+            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MinHeight="200" MaxHeight="300" Margin="5">
                 <StackPanel>
                     <TextBlock Text="Мои групповые занятия" FontWeight="Bold" Margin="0 0 0 5"/>
                     <ListView x:Name="AuthorizedGroupList" SelectionMode="Single" MouseDoubleClick="AuthorizedGroupList_MouseDoubleClick">

@@ -18,4 +18,6 @@ FE:\fitness-club\Pages\ClientPages\PaymentWindow.xaml;;
 FE:\fitness-club\Pages\TrainerPage.xaml;;
 FE:\fitness-club\Windows\AuthorizationWin.xaml;;
 FE:\fitness-club\Windows\RegistrationWin.xaml;;
+FE:\fitness-club\Pages\TrainerPages\TrainerProfilePage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\TrainerReviewsPage.xaml;;
 

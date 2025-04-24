@@ -11,7 +11,10 @@
 
   <ItemGroup>
     <None Remove="Images\ellipse.jpg" />
+    <None Remove="Images\exit.png" />
+    <None Remove="Images\logout.png" />
     <None Remove="Images\treadmill.jpg" />
+    <None Remove="Images\user.png" />
     <None Remove="Images\верхний блок.jpg" />
     <None Remove="Images\гребной.jpg" />
     <None Remove="Images\жим нгогами.jpg" />
@@ -20,10 +23,6 @@
     <None Remove="Images\разведение рук в кроссовере.jpg" />
     <None Remove="Images\сгибаниеног.jpg" />
     <None Remove="Images\шут.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\TrainerPages\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +37,16 @@
 
   <ItemGroup>
     <Resource Include="Images\ellipse.jpg" />
+    <Resource Include="Images\exit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logout.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\treadmill.jpg" />
+    <Resource Include="Images\user.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\верхний блок.jpg" />
     <Resource Include="Images\гребной.jpg" />
     <Resource Include="Images\жим нгогами.jpg" />

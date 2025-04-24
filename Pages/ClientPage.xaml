@@ -11,13 +11,13 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="LightGray">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Grid.Row="0">
                 <Button Content="Профиль" Margin="10 10 10 10" Click="ProfileBtn_Click"/>
@@ -32,9 +32,20 @@
                 <Button Content="Наши тренеры" Margin="10 0 10 10" Click="TrainersBtn_Click"/>
                 <Button Content="Страница оплаты" Margin="10 0 10 10" Click="PaymentBtn_Click"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">
-                <Button x:Name="logoutBtn" Click="logoutBtn_Click" Content="Выйти из профиля"  VerticalAlignment="Bottom" Margin="10 0 10 10"/>
-                <Button x:Name="exitBtn" Click="exitBtn_Click" Content="Выйти из приложения"  VerticalAlignment="Bottom" Margin="10 0 10 10"/>
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top">
+                    <Image Source="../Images/user.png" Width="24" Height="24" Margin="5 0 0 0"/>
+                    <TextBlock x:Name="userName" Text="Имяяяяя Фамилия Отчетство" TextAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="center">
+                    <Button Background="Transparent" Width="34" Height="34" BorderThickness="0" x:Name="logoutBtn" Click="logoutBtn_Click"  VerticalAlignment="Bottom" Margin="10 0 10 0">
+                        <Image Source="../Images/logout.png" Width="32" Height="32"/>
+                    </Button>
+                    <Button Background="Transparent" Width="34" Height="34" BorderThickness="0" x:Name="exitBtn" Click="exitBtn_Click"  VerticalAlignment="Bottom" Margin="10 0 10 0">
+                        <Image Source="../Images/exit.png" Width="32" Height="32"/>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <Frame x:Name="ClientFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
