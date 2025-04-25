@@ -24,6 +24,11 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Background="Transparent" Padding="0">
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Вернуть средства" Click="RefundVisitContext_Click" CommandParameter="{Binding ClassId}" />
+                                    </ContextMenu>
+                                </Border.ContextMenu>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -40,7 +45,8 @@
                                             <TextBlock Text="{Binding TrainerName, StringFormat='Тренер: {0}'}"/>
                                         </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0">
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10">
+                                        <TextBlock Text="{Binding Visited, StringFormat='Посещено: {0}'}" FontWeight="Bold"/>
                                         <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" FontWeight="Bold"/>
                                     </StackPanel>
                                 </Grid>

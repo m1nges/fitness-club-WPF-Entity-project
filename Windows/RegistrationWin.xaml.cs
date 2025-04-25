@@ -43,7 +43,6 @@ namespace fitness_club.Windows
 
         private void registrationBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Общая валидация формы
             if (string.IsNullOrWhiteSpace(firstNameTb.Text) ||
                 string.IsNullOrWhiteSpace(lastNameTb.Text) ||
                 string.IsNullOrWhiteSpace(emailTb.Text) ||

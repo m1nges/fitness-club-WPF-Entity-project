@@ -30,13 +30,16 @@ namespace fitness_club.Pages.ClientPages
         string paymentType;
         int paymentSum;
         decimal clientBalance = 0;
+
+
+        DateTime todayUTC = DateTime.SpecifyKind(DateTime.Today, DateTimeKind.Utc);
         public PaymentWindow(string paymentType, int paymentSum)
         {
             InitializeComponent();
+            GetClientsBalance();
             proceedAmoutTbox.Text = 0.ToString();
             this.paymentType = paymentType;
             this.paymentSum = paymentSum;
-            GetClientsBalance();
         }
 
         public void GetClientsBalance()
@@ -148,7 +151,8 @@ namespace fitness_club.Pages.ClientPages
                                         OperationDescription = $"Оплата: {paymentType}",
                                         PaymentWay = "Карта",
                                         Amount = -paymentSum,
-                                        TransactionType = "списание"
+                                        TransactionType = "списание",
+                                        TransactionDate = todayUTC
                                     });
 
                                     db.SaveChanges();
@@ -191,7 +195,8 @@ namespace fitness_club.Pages.ClientPages
                         OperationDescription = $"Оплата: {paymentType}",
                         PaymentWay = "QR-код",
                         Amount = -paymentSum,
-                        TransactionType = "списание"
+                        TransactionType = "списание",
+                        TransactionDate = todayUTC
                     });
 
                     db.SaveChanges();
@@ -336,11 +341,11 @@ namespace fitness_club.Pages.ClientPages
                     OperationDescription = $"Частичная оплата: {paymentType}",
                     PaymentWay = "С баланса",
                     Amount = -proceedAmount,
-                    TransactionType = "списание"
+                    TransactionType = "списание",
+                    TransactionDate = todayUTC
                 });
 
                 db.SaveChanges();
-
                 MessageBox.Show($"Списано {proceedAmount} руб. Остаток: {client.Balance} руб. " +
                                 "Для оплаты оставшейся части заказа выберите другой способ оплаты!");
                 payByBalanceBtn.Content = $"Оплатить {paymentSum} руб.";
@@ -355,7 +360,8 @@ namespace fitness_club.Pages.ClientPages
                     OperationDescription = $"Полная оплата: {paymentType}",
                     PaymentWay = "С баланса",
                     Amount = -paymentSum,
-                    TransactionType = "списание"
+                    TransactionType = "списание",
+                    TransactionDate = todayUTC
                 });
 
                 db.SaveChanges();
@@ -367,6 +373,7 @@ namespace fitness_club.Pages.ClientPages
                     "Успешная оплата",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
+
 
                 if (result == MessageBoxResult.OK)
                 {
@@ -382,6 +389,11 @@ namespace fitness_club.Pages.ClientPages
         private void fullAmountOfPrice_Click(object sender, RoutedEventArgs e)
         {
             proceedAmoutTbox.Text = paymentSum.ToString();
+        }
+
+        private void proceedAmoutTbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            payByBalanceBtn.Content = $"Оплатить {proceedAmoutTbox.Text} руб.";
         }
     }
 }

@@ -38,6 +38,9 @@
 
             <TextBlock Text="Кол-во мест:" Margin="20 0 5 0" VerticalAlignment="Center"/>
             <TextBox x:Name="PeopleQtyBox" Width="80"/>
+            
+            <TextBlock Text="Цена занятия:" Margin="20 0 5 0" VerticalAlignment="Center"/>
+            <TextBox x:Name="priceBox" Width="80"/>
         </StackPanel>
 
         <Button Content="Создать занятие" Padding="8" Width="200" HorizontalAlignment="Left"
@@ -50,12 +53,13 @@
         <ListView x:Name="GroupClassesListView" Height="300">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date}" Width="100"/>
-                    <GridViewColumn Header="Время" DisplayMemberBinding="{Binding Time}" Width="120"/>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date}" Width="80"/>
+                    <GridViewColumn Header="Время" DisplayMemberBinding="{Binding Time}" Width="80"/>
                     <GridViewColumn Header="Занятие" DisplayMemberBinding="{Binding ClassName}" Width="160"/>
                     <GridViewColumn Header="Тренер" DisplayMemberBinding="{Binding TrainerName}" Width="150"/>
                     <GridViewColumn Header="Зал" DisplayMemberBinding="{Binding HallName}" Width="100"/>
                     <GridViewColumn Header="Мест" DisplayMemberBinding="{Binding PeopleQty}" Width="60"/>
+                    <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}" Width="60"/>
                     <GridViewColumn Header="Изменить">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

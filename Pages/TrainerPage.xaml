@@ -25,6 +25,7 @@
                 <Button Content="Расписание занятий" Margin="10 0 10 10" Click="SchedulesBtn_Click"/>
                 <Button Content="История занятий" Margin="10 0 10 10" Click="VisitsBtn_Click"/>
                 <Button Content="Мои клиенты" Margin="10 0 10 10" Click="MyClients_Click"/>
+                <Button Content="График работы" Margin="10 0 10 10" Click="Workschedule_Click"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">

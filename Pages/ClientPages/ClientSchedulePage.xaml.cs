@@ -25,7 +25,6 @@ namespace fitness_club.Pages.ClientPages
     public partial class ClientSchedulePage : Page
     {
         Users currentUser = null;
-
         public ClientSchedulePage()
         {
             InitializeComponent();
@@ -694,101 +693,103 @@ namespace fitness_club.Pages.ClientPages
                 MessageBox.Show("Вы не выбрали занятие, о котором хотите загрузить информацию");
         }
 
+        private void CancelClientClass(int classId, bool isIndividual)
+        {
+            try
+            {
+                using var db = new AppDbContext();
+
+                var clientId = AuthorizationWin.currentUser.Client.ClientId;
+                var todayUtc = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
+
+                var classVisit = db.ClassVisits
+                    .Include(cv => cv.ClientMembership)
+                    .FirstOrDefault(cv => cv.ClassId == classId && cv.ClientMembership.ClientId == clientId);
+
+                if (classVisit == null)
+                {
+                    MessageBox.Show("Запись не найдена.");
+                    return;
+                }
+
+                if (classVisit.Visited)
+                {
+                    MessageBox.Show("Нельзя отменить занятие, которое уже посещено.");
+                    return;
+                }
+
+                var payment = db.ClassPayments
+                    .FirstOrDefault(cp => cp.ClassId == classId && cp.ClientId == clientId);
+
+                if (payment != null && payment.PaymentDate != null)
+                {
+                    var client = db.Clients.FirstOrDefault(c => c.ClientId == clientId);
+                    if (client != null)
+                    {
+                        client.Balance += (decimal)payment.Price;
+
+                        db.ClientTransactions.Add(new ClientTransaction
+                        {
+                            ClientId = client.ClientId,
+                            OperationDescription = isIndividual
+                                ? "Возврат за отмену индивидуального занятия"
+                                : "Возврат за отмену группового занятия",
+                            PaymentWay = "На баланс",
+                            Amount = (decimal)payment.Price,
+                            TransactionType = "возврат",
+                            TransactionDate = todayUtc
+                        });
+                    }
+                }
+
+                if (payment != null)
+                    db.ClassPayments.Remove(payment);
+
+                db.ClassVisits.Remove(classVisit);
+
+                if (isIndividual)
+                {
+                    var classToDelete = db.Class.FirstOrDefault(c => c.ClassId == classId);
+                    if (classToDelete != null)
+                        db.Class.Remove(classToDelete);
+                }
+
+                db.SaveChanges();
+
+                if (isIndividual)
+                {
+                    LoadIndividualClasses();
+                    UpdateAvailableTimeSlots();
+                }
+                else
+                {
+                    LoadGroupClasses();
+                    LoadAvailableGroupClasses();
+                }
+
+                MessageBox.Show("Запись на занятие отменена.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при отмене: {ex.Message}");
+            }
+        }
+
         private void CancelIndividualClassContext_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem menuItem && menuItem.CommandParameter is int classId)
             {
-                try
-                {
-                    using (var db = new AppDbContext())
-                    {
-                        var classVisit = db.ClassVisits
-                            .FirstOrDefault(cv => cv.ClassId == classId);
-
-                        if (classVisit != null)
-                        {
-                            var paymentsToDelete = db.ClassPayments
-                                .Where(cp => cp.ClassId == classId && cp.ClientId == AuthorizationWin.currentUser.Client.ClientId)
-                                .ToList();
-
-                            db.ClassPayments.RemoveRange(paymentsToDelete);
-
-                            db.ClassVisits.Remove(classVisit);
-
-                            var classToDelete = db.Class
-                                .FirstOrDefault(c => c.ClassId == classId);
-
-                            if (classToDelete != null)
-                                db.Class.Remove(classToDelete);
-
-                            db.SaveChanges();
-
-                            LoadIndividualClasses();
-                            MessageBox.Show("Запись на занятие успешно отменена.", "Успех",
-                                MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Запись на занятие не найдена.", "Ошибка",
-                                MessageBoxButton.OK, MessageBoxImage.Warning);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Произошла ошибка при отмене записи: {ex.Message}", "Ошибка",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                CancelClientClass(classId, isIndividual: true);
             }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите занятие для отмены.", "Информация",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            UpdateAvailableTimeSlots();
-            LoadAvailableGroupClasses();
         }
 
         private void CancelGroupClassContext_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem menuItem && menuItem.CommandParameter is int classId)
             {
-                try
-                {
-                    using (var db = new AppDbContext())
-                    {
-                        var paymentsToDelete = db.ClassPayments
-                                .Where(cp => cp.ClassId == classId && cp.ClientId == AuthorizationWin.currentUser.Client.ClientId)
-                                .ToList();
-
-                        db.ClassPayments.RemoveRange(paymentsToDelete);
-
-                        var classVisit = db.ClassVisits
-                            .FirstOrDefault(cv => cv.ClassId == classId);
-                        if (classVisit != null)
-                        {
-                            db.ClassVisits.Remove(classVisit);
-                            db.SaveChanges();
-                            LoadGroupClasses();
-                            MessageBox.Show("Запись на занятие успешно отменена.", "Успех",
-                                MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Произошла ошибка при отмене записи: {ex.Message}", "Ошибка",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                CancelClientClass(classId, isIndividual: false);
             }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите занятие для отмены.", "Информация",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-
-            UpdateAvailableTimeSlots();
-            LoadAvailableGroupClasses();
         }
+
     }
 }

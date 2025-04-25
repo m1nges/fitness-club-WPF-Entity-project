@@ -70,6 +70,12 @@
     <Compile Update="Pages\ClientPages\ClientTrainerListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ClientPages\ClientTrainingPlanFromTrainer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ClientPages\ClientTransactionsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ClientPages\ClientVisitsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +101,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\TrainerPages\TrainerReviewsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\TrainerPages\TrainerWorkSchedule.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\TrainerPages\WritePlanWindow.xaml.cs">

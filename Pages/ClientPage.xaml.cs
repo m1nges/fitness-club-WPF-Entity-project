@@ -1,4 +1,5 @@
 ﻿using fitness_club.Classes;
+using fitness_club.Model;
 using fitness_club.Pages.ClientPages;
 using fitness_club.Windows;
 using System;
@@ -90,6 +91,16 @@ namespace fitness_club.Pages
         private void PaymentBtn_Click(object sender, RoutedEventArgs e)
         {
             ClientFrame.Navigate(new ClientPaymentPage());
+        }
+
+        private void TransactionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ClientFrame.Navigate(new ClientTransactionsPage());
+        }
+
+        private void TrainingPlanBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ClientFrame.Navigate(new ClientTrainingPlanFromTrainer());
         }
     }
 }

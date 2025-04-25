@@ -72,5 +72,10 @@ namespace fitness_club.Pages
         {
             TrainerFrame.Navigate(new TrainerClientsPage());
         }
+
+        private void Workschedule_Click(object sender, RoutedEventArgs e)
+        {
+            TrainerFrame.Navigate(new TrainerWorkSchedule()); 
+        }
     }
 }

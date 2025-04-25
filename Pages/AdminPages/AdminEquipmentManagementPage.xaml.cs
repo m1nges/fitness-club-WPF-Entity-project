@@ -80,6 +80,94 @@ namespace fitness_club.Pages.AdminPages
                 LoadEquipment();
             }
         }
+
+        private void AddEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            string equipmentName = NewEquipmentNameTb.Text.Trim();
+            if (!int.TryParse(NewEquipmentQtyTb.Text, out int quantity) || quantity <= 0)
+            {
+                MessageBox.Show("Введите корректное количество (>0)", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(equipmentName))
+            {
+                MessageBox.Show("Введите название оборудования.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            using var db = new AppDbContext();
+
+            // По умолчанию ставим состояние "Новое" или 1
+            int defaultConditionId = db.EquipmentConditions
+                .OrderBy(ec => ec.EquipmentConditionId)
+                .Select(ec => ec.EquipmentConditionId)
+                .FirstOrDefault();
+
+            var newEquipment = new Equipment
+            {
+                EquipmentName = equipmentName,
+                EquipmentConditionId = defaultConditionId,
+                DeliveryDate = DateTime.UtcNow,
+                LastMaintenanceDate = DateTime.UtcNow,
+                Quantity = quantity
+            };
+
+            db.Equipment.Add(newEquipment);
+            db.SaveChanges();
+
+            MessageBox.Show("Оборудование успешно добавлено!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Обновляем таблицу
+            LoadEquipment();
+
+            // Очищаем поля
+            NewEquipmentNameTb.Text = "";
+            NewEquipmentQtyTb.Text = "";
+        }
+
+        private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is int equipmentId)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить это оборудование?\nОно также будет удалено из всех залов.",
+                                             "Подтверждение удаления",
+                                             MessageBoxButton.YesNo,
+                                             MessageBoxImage.Warning);
+
+                if (result != MessageBoxResult.Yes)
+                    return;
+
+                try
+                {
+                    using var db = new AppDbContext();
+
+                    // Удаляем все связи в hall_equipment
+                    var hallEquipments = db.HallEquipments.Where(he => he.EquipmentId == equipmentId).ToList();
+                    db.HallEquipments.RemoveRange(hallEquipments);
+
+                    // Удаляем оборудование
+                    var equipment = db.Equipment.FirstOrDefault(e => e.EquipmentId == equipmentId);
+                    if (equipment != null)
+                    {
+                        db.Equipment.Remove(equipment);
+                        db.SaveChanges();
+                        MessageBox.Show("Оборудование успешно удалено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadEquipment(); // Обновить таблицу
+                    }
+                    else
+                    {
+                        MessageBox.Show("Оборудование не найдено.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении оборудования: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+
     }
 
     public class EquipmentEditableRow

@@ -101,6 +101,7 @@ namespace fitness_club.Pages.AdminPages
                 }).ToList();
 
             ClassInfoComboBox.ItemsSource = db.ClassInfo
+                .Where(c=>c.ClassName!= "Индивидуальное занятие")
                 .Select(c => new
                 {
                     c.ClassInfoId,
@@ -118,7 +119,7 @@ namespace fitness_club.Pages.AdminPages
                 !DatePicker.SelectedDate.HasValue ||
                 !TimeSpan.TryParseExact(StartTimeBox.Text, "hh\\:mm", CultureInfo.InvariantCulture, out var startTime) ||
                 !TimeSpan.TryParseExact(EndTimeBox.Text, "hh\\:mm", CultureInfo.InvariantCulture, out var endTime) ||
-                !int.TryParse(PeopleQtyBox.Text, out int peopleQty))
+                !int.TryParse(PeopleQtyBox.Text, out int peopleQty) || !double.TryParse(priceBox.Text, out double price))
             {
                 MessageBox.Show("Пожалуйста, заполните все поля корректно.");
                 return;
@@ -151,7 +152,8 @@ namespace fitness_club.Pages.AdminPages
                 WorkScheduleId = workSchedule.WorkScheduleId,
                 StartTime = startTime,
                 EndTime = endTime,
-                PeopleQuantity = peopleQty
+                PeopleQuantity = peopleQty,
+                Price = price
             };
             bool overlaps = db.Class.Any(c =>
                 c.WorkScheduleId == workSchedule.WorkScheduleId &&
@@ -194,33 +196,13 @@ namespace fitness_club.Pages.AdminPages
                     ClassName = c.ClassInfo.ClassName,
                     TrainerName = c.WorkSchedule.Trainer.LastName + " " + c.WorkSchedule.Trainer.FirstName,
                     HallName = c.Hall.HallName,
-                    PeopleQty = c.PeopleQuantity
+                    PeopleQty = c.PeopleQuantity,
+                    c.Price
                 })
                 .ToList();
 
             GroupClassesListView.ItemsSource = groupClasses;
         }
-
-        //private void LoadWorkSchedules()
-        //{
-        //    using var db = new AppDbContext();
-        //    var today = DateTime.Today;
-
-        //    var shifts = db.WorkSchedules
-        //        .Include(ws => ws.Trainer)
-        //        .Where(ws => ws.WorkDate >= today)
-        //        .OrderBy(ws => ws.WorkDate)
-        //        .ThenBy(ws => ws.StartTime)
-        //        .Select(ws => new
-        //        {
-        //            TrainerName = ws.Trainer.LastName + " " + ws.Trainer.FirstName,
-        //            Date = ws.WorkDate.ToShortDateString(),
-        //            Time = $"{ws.StartTime:hh\\:mm} - {ws.EndTime:hh\\:mm}"
-        //        })
-        //        .ToList();
-
-        //    WorkSchedulesListView.ItemsSource = shifts;
-        //}
 
 
         private void DeleteClass_Click(object sender, RoutedEventArgs e)

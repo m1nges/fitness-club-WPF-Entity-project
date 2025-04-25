@@ -123,6 +123,7 @@ namespace fitness_club.Pages.ClientPages
         {
             using (var db = new AppDbContext())
             {
+
                 var userId = AuthorizationWin.currentUser.UserId;
 
                 var client = db.Clients.FirstOrDefault(c => c.UserId == userId);
@@ -216,5 +217,6 @@ namespace fitness_club.Pages.ClientPages
                 costTb.Foreground = Brushes.Green;
             }
         }
+
     }
 }

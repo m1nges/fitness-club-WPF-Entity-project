@@ -36,6 +36,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Удалить" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="❌" Tag="{Binding EquipmentId}" Click="DeleteEquipment_Click" Padding="4" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid>
@@ -45,5 +52,22 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Сохранить изменения" Padding="8" Width="200" Click="SaveChanges_Click" HorizontalAlignment="Left"/>
         </Grid>
+
+        <StackPanel Margin="0,20,0,0">
+            <TextBlock Text="Добавить новое оборудование" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Название:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                <TextBox x:Name="NewEquipmentNameTb" Width="200" Margin="0 0 20 0"/>
+
+                <TextBlock Text="Количество:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                <TextBox x:Name="NewEquipmentQtyTb" Width="100" Margin="0 0 20 0"/>
+
+                <Button Content="Добавить оборудование" Click="AddEquipment_Click" Padding="8"/>
+            </StackPanel>
+        </StackPanel>
+
     </StackPanel>
+    
+    
 </Page>

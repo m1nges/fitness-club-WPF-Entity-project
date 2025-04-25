@@ -14,6 +14,8 @@ namespace fitness_club.Pages.ClientPages
         private List<FreeServiceViewModel> freeServicesGlobal;
         int rentedLockerId = 0;
 
+        
+
         DateTime todayUtc = DateTime.SpecifyKind(DateTime.Today, DateTimeKind.Utc);
         string? clientGender = "";
         public ClientServicesPage()
@@ -565,7 +567,8 @@ namespace fitness_club.Pages.ClientPages
                                         OperationDescription = $"Возврат за отмену услуги: {payment.Service.ServiceName}",
                                         PaymentWay = "На баланс",
                                         Amount = (decimal)payment.Price,
-                                        TransactionType = "возврат"
+                                        TransactionType = "возврат",
+                                        TransactionDate = todayUtc
                                     });
                                 }
                             }

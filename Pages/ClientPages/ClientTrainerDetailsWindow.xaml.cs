@@ -68,7 +68,7 @@ namespace fitness_club.Pages.ClientPages
                 avgTrainerRating.Text = $"Средняя оценка: {(avgRating != 0 ? $"{avgRating}" : "Нет оценки")}";
 
                 var hasUserClasses = db.ClassVisits
-                    .Count(cv => cv.Class.WorkSchedule.TrainerId == trainerId && cv.ClientMembership.ClientId == AuthorizationWin.currentUser.Client.ClientId && cv.Class.ClassTypeId == 2);
+                    .Count(cv => cv.Class.WorkSchedule.TrainerId == trainerId && cv.ClientMembership.ClientId == AuthorizationWin.currentUser.Client.ClientId && cv.Class.ClassTypeId == 2 && cv.Visited == true);
 
                 if (hasUserClasses > 0)
                 {
