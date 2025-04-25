@@ -23,7 +23,8 @@
                 <Button Content="Профиль" Margin="10 10 10 10" Click="ProfileBtn_Click"/>
                 <Button Content="Отзывы о вас" Margin="10 0 10 10" Click="ReviewsBtn_Click"/>
                 <Button Content="Расписание занятий" Margin="10 0 10 10" Click="SchedulesBtn_Click"/>
-                <Button Content="История посещения занятий" Margin="10 0 10 10" Click="VisitsBtn_Click"/>
+                <Button Content="История занятий" Margin="10 0 10 10" Click="VisitsBtn_Click"/>
+                <Button Content="Мои клиенты" Margin="10 0 10 10" Click="MyClients_Click"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">

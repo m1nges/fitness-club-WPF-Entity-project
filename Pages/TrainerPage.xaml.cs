@@ -45,12 +45,13 @@ namespace fitness_club.Pages
 
         private void SchedulesBtn_Click(object sender, RoutedEventArgs e)
         {
+            TrainerFrame.Navigate(new TrainerClassesPage());
 
         }
 
         private void VisitsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            TrainerFrame.Navigate(new TrainerPastClassesPage());
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
@@ -65,6 +66,11 @@ namespace fitness_club.Pages
             authWin.Show();
             var window = Window.GetWindow(this);
             window?.Close();
+        }
+
+        private void MyClients_Click(object sender, RoutedEventArgs e)
+        {
+            TrainerFrame.Navigate(new TrainerClientsPage());
         }
     }
 }

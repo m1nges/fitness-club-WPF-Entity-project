@@ -27,4 +27,6 @@ public class TrainerReview
 
     [Column("review_content")]
     public string? ReviewContent { get; set; }
+    [Column("moderated")]
+    public bool Moderated { get; set; }
 }

@@ -16,6 +16,7 @@ namespace fitness_club.Model
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<MembershipService> MembershipServices { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Users> Users { get; set; }
@@ -31,6 +32,7 @@ namespace fitness_club.Model
         public DbSet<ClassPayments> ClassPayments { get; set; }
         public DbSet<MembershipPayments> MembershipPayments { get; set; }
         public DbSet<ServicesPayments> ServicesPayments { get; set; }
+        public DbSet<TrainingPlan> TrainingPlans { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

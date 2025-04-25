@@ -20,4 +20,18 @@ FE:\fitness-club\Windows\AuthorizationWin.xaml;;
 FE:\fitness-club\Windows\RegistrationWin.xaml;;
 FE:\fitness-club\Pages\TrainerPages\TrainerProfilePage.xaml;;
 FE:\fitness-club\Pages\TrainerPages\TrainerReviewsPage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\TrainerClassesPage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\ClassVisitorsListPage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\TrainerPastClassesPage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\TrainerClientsPage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\WritePlanWindow.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminWorkSchedulePage.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminManageGroupClassesPage.xaml;;
+FE:\fitness-club\Pages\AdminPages\EditGroupClassWindow.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminEquipmentManagementPage.xaml;;
+FE:\fitness-club\Pages\AdminPages\AssignEquipmentWindow.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminModerationPage.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminUserEditPage.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminServiceManagementPage.xaml;;
+FE:\fitness-club\Pages\AdminPages\AdminMembershipManagementPage.xaml;;
 

@@ -28,5 +28,8 @@ namespace fitness_club.Classes
 
         [Column("review_content", TypeName = "text")]
         public string? ReviewContent { get; set; }
+
+        [Column("moderated")]
+        public bool Moderated { get; set; }
     }
 }

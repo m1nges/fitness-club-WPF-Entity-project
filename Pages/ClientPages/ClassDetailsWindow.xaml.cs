@@ -34,30 +34,34 @@ namespace fitness_club.Pages.ClientPages
 
         public void LoadClassReviews()
         {
-            using(var db = new AppDbContext())
+            using (var db = new AppDbContext())
             {
-                
-
                 var classInfoId = db.Class
                     .Where(c => c.ClassId == classId)
                     .Select(c => c.ClassInfoId)
                     .FirstOrDefault();
+
                 var reviews = db.ClassReviews
-                    .Where(r => r.Class_info_id == classInfoId)
+                    .Where(r => r.Class_info_id == classInfoId && r.Moderated) // только прошедшие модерацию
                     .Include(r => r.Client)
                     .Select(r => new
                     {
                         r.ReviewContent,
                         r.ReviewGrade,
-                        ClientName = r.Client.IsAddAuthorName ? r.Client.LastName + " " + r.Client.FirstName : "Аноним",
+                        ClientName = r.Client.IsAddAuthorName
+                            ? r.Client.LastName + " " + r.Client.FirstName
+                            : "Аноним"
                     })
                     .ToList();
+
                 reviewsListView.ItemsSource = reviews;
+
                 avgClassRating.Text = reviews.Count > 0
-                ? $"Средняя оценка: {reviews.Average(r => r.ReviewGrade):0.0}"
-                : "Пока нет оценок";
+                    ? $"Средняя оценка: {reviews.Average(r => r.ReviewGrade):0.0}"
+                    : "Пока нет оценок";
             }
         }
+
 
         public void CheckIfIndividual()
         {
@@ -92,7 +96,7 @@ namespace fitness_club.Pages.ClientPages
                 if (existingReview != null)
                 {
                     isEditMode = true;
-                    reviewsBlockTb.Text = "Ваш отзыв на это занятие";
+                    reviewsBlockTb.Text = "Ваш отзыв на это занятие. При измнение отзыв будет отправлен на модерацию!";
                     reviewTextBox.Text = existingReview.ReviewContent;
                     currentRating = existingReview.ReviewGrade;
                     HighlightStars(currentRating);
@@ -120,6 +124,7 @@ namespace fitness_club.Pages.ClientPages
                 {
                     existingReview.ReviewContent = reviewTextBox.Text;
                     existingReview.ReviewGrade = currentRating;
+                    existingReview.Moderated = false;
                     db.SaveChanges();
                 }
             }
@@ -365,6 +370,7 @@ namespace fitness_club.Pages.ClientPages
                     ReviewContent = reviewTextBox.Text,
                     ReviewGrade = currentRating,
                     ClientId = AuthorizationWin.currentUser.Client.ClientId,
+                    Moderated = false,
                 };
                 db.ClassReviews.Add(classReview);
                 db.SaveChanges();

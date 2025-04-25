@@ -44,6 +44,9 @@ namespace fitness_club.Classes
         [Column("price")]
         public double? Price { get; set; }
 
+        [Column("trainer_checked")]
+        public bool TrainerChecked { get; set; }
+
         public virtual ICollection<ClassVisits> ClassVisits { get; set; }
     }
 }

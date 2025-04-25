@@ -1,0 +1,49 @@
+﻿<Page x:Class="fitness_club.Pages.AdminPages.AdminEquipmentManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages.AdminPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="800"
+      Title="AdminEquipmentManagementPage"
+      Background="white">
+
+    <StackPanel Margin="20">
+
+        <TextBlock Text="Управление оборудованием" FontSize="22" FontWeight="Bold" Margin="0 0 0 15"/>
+
+        <DataGrid x:Name="EquipmentGrid" AutoGenerateColumns="False" Height="350"
+                  CanUserAddRows="False" IsReadOnly="False" Margin="0 0 0 15">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding EquipmentName}" IsReadOnly="True" Width="180"/>
+                <DataGridComboBoxColumn Header="Состояние"
+                            SelectedValueBinding="{Binding EquipmentConditionId}"
+                            SelectedValuePath="EquipmentConditionId"
+                            DisplayMemberPath="EquipmentConditionDescription"
+                            Width="150"
+                            x:Name="ConditionColumn"/>
+                <DataGridTextColumn Header="Поставка" Binding="{Binding DeliveryDate}" IsReadOnly="True" Width="120"/>
+                <DataGridTextColumn Header="ТО" Binding="{Binding LastMaintenanceDate}" Width="120"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Quantity}" Width="80"/>
+
+                <DataGridTemplateColumn Header="Распределение" Width="180">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Открыть окно" Click="AssignEquipment_Click" Tag="{Binding EquipmentId}"
+                        Padding="4" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Сохранить изменения" Padding="8" Width="200" Click="SaveChanges_Click" HorizontalAlignment="Left"/>
+        </Grid>
+    </StackPanel>
+</Page>

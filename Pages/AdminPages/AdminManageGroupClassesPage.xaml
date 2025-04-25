@@ -1,0 +1,90 @@
+﻿<Page x:Class="fitness_club.Pages.AdminPages.AdminManageGroupClassesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:fitness_club.Pages.AdminPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="841.459"
+      Title="AdminManageGroupClassesPage"
+      Background="white">
+
+    <StackPanel Margin="20">
+
+        <TextBlock Text="Создание группового занятия" FontSize="20" FontWeight="Bold" Margin="0 0 0 15"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Text="Тренер:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+            <ComboBox x:Name="TrainerComboBox" Width="180" DisplayMemberPath="FullName" SelectedValuePath="TrainerId"/>
+
+            <TextBlock Text="Зал:" Margin="20 0 5 0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="HallComboBox" Width="180" DisplayMemberPath="HallName" SelectedValuePath="HallId"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Text="Тип занятия:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+            <ComboBox x:Name="ClassInfoComboBox" Width="200" DisplayMemberPath="ClassName" SelectedValuePath="ClassInfoId"/>
+
+            <TextBlock Text="Дата:" Margin="20 0 5 0" VerticalAlignment="Center"/>
+            <DatePicker x:Name="DatePicker" Width="150"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Text="Время начала:" Margin="0 0 5 0" VerticalAlignment="Center"/>
+            <TextBox x:Name="StartTimeBox" Width="80" ToolTip="формат: HH:mm"/>
+
+            <TextBlock Text="Время конца:" Margin="20 0 5 0" VerticalAlignment="Center"/>
+            <TextBox x:Name="EndTimeBox" Width="80" ToolTip="формат: HH:mm"/>
+
+            <TextBlock Text="Кол-во мест:" Margin="20 0 5 0" VerticalAlignment="Center"/>
+            <TextBox x:Name="PeopleQtyBox" Width="80"/>
+        </StackPanel>
+
+        <Button Content="Создать занятие" Padding="8" Width="200" HorizontalAlignment="Left"
+                Click="CreateClass_Click" Margin="0 0 0 20"/>
+
+        <Separator Margin="0 10 0 10"/>
+
+        <TextBlock Text="Существующие групповые занятия" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+
+        <ListView x:Name="GroupClassesListView" Height="300">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date}" Width="100"/>
+                    <GridViewColumn Header="Время" DisplayMemberBinding="{Binding Time}" Width="120"/>
+                    <GridViewColumn Header="Занятие" DisplayMemberBinding="{Binding ClassName}" Width="160"/>
+                    <GridViewColumn Header="Тренер" DisplayMemberBinding="{Binding TrainerName}" Width="150"/>
+                    <GridViewColumn Header="Зал" DisplayMemberBinding="{Binding HallName}" Width="100"/>
+                    <GridViewColumn Header="Мест" DisplayMemberBinding="{Binding PeopleQty}" Width="60"/>
+                    <GridViewColumn Header="Изменить">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="✏️" Padding="2" Click="EditClass_Click" Tag="{Binding ClassId}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Удалить">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="❌" Padding="2" Click="DeleteClass_Click" Tag="{Binding ClassId}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Text="Свободные слоты тренеров (по сменам)" FontSize="18" FontWeight="Bold" Margin="0 20 0 10"/>
+
+        <ListView x:Name="FreeSlotsListView" MouseDoubleClick="FreeSlotsListView_MouseDoubleClick" Height="200">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Тренер" DisplayMemberBinding="{Binding Trainer}" Width="250"/>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date}" Width="120"/>
+                    <GridViewColumn Header="Свободное время" DisplayMemberBinding="{Binding Slot}" Width="180"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </StackPanel>
+
+</Page>

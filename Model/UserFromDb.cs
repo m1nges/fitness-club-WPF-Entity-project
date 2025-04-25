@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using fitness_club.Classes;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace fitness_club.Model
 {
@@ -170,8 +171,9 @@ namespace fitness_club.Model
                     }
                     else
                     {
-                        MessageBox.Show("Some shit happened");
-                        return null;
+                        var admin = db.Users
+                            .FirstOrDefault(u => u.Login == login);
+                        return admin;
                     }
                 }
                 catch (Exception ex)

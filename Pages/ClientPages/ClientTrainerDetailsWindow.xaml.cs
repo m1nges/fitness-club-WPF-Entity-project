@@ -89,19 +89,17 @@ namespace fitness_club.Pages.ClientPages
         {
             using (var db = new AppDbContext())
             {
-                var trainer = db.Trainers
-                    .Include(t => t.TrainerReviews)
-                    .FirstOrDefault(t => t.TrainerId == trainerId);
-                if (trainer != null && trainer.TrainerReviews.Count > 0)
-                {
-                    avgRating = trainer.TrainerReviews.Average(r => r.ReviewGrade);
-                }
-                else
-                {
-                    avgRating = 0;
-                }
+                var reviews = db.TrainerReviews
+                    .Where(t => t.TrainerId == trainerId && t.Moderated)
+                    .ToList();
+
+                avgRating = reviews.Count > 0
+                    ? reviews.Average(r => r.ReviewGrade)
+                    : 0;
             }
         }
+
+
         private string CalculateExperience(DateTime startDate)
         {
             DateTime today = DateTime.Now;
@@ -130,7 +128,7 @@ namespace fitness_club.Pages.ClientPages
             using (var db = new AppDbContext())
             {
                 var reviews = db.TrainerReviews
-                    .Where(tr => tr.TrainerId == trainerId)
+                    .Where(tr => tr.TrainerId == trainerId && tr.Moderated == true)
                     .Include(r => r.Author)
                     .Select(r => new
                     {
@@ -156,7 +154,7 @@ namespace fitness_club.Pages.ClientPages
                 if (existingReview != null)
                 {
                     isEditMode = true;
-                    reviewsBlockTb.Text = "Ваш отзыв на это занятие";
+                    reviewsBlockTb.Text = "Ваш отзыв на этого тренера. При изменение отзыв будет отправлен на модерацию!";
                     reviewTextBox.Text = existingReview.ReviewContent;
                     currentRating = existingReview.ReviewGrade;
                     HighlightStars(currentRating);
@@ -179,6 +177,7 @@ namespace fitness_club.Pages.ClientPages
                 {
                     existingReview.ReviewContent = reviewTextBox.Text;
                     existingReview.ReviewGrade = currentRating;
+                    existingReview.Moderated = false;
                     db.SaveChanges();
                 }
             }
@@ -262,6 +261,7 @@ namespace fitness_club.Pages.ClientPages
                     ReviewContent = reviewTextBox.Text,
                     ReviewGrade = currentRating,
                     AuthorId = AuthorizationWin.currentUser.Client.ClientId,
+                    Moderated = false
                 };
                 db.TrainerReviews.Add(trainerReview);
                 db.SaveChanges();

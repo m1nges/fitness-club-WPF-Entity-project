@@ -25,5 +25,8 @@ namespace fitness_club.Classes
 
         [ForeignKey("ClientMembershipId")]
         public virtual ClientMembership ClientMembership { get; set; }
+
+        [Column("visited")]
+        public bool Visited { get; set; }
     }
 }
