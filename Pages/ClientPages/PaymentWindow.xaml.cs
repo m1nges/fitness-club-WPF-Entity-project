@@ -29,11 +29,24 @@ namespace fitness_club.Pages.ClientPages
         public bool PaymentSuccess { get; private set; } = false;
         string paymentType;
         int paymentSum;
+        decimal clientBalance = 0;
         public PaymentWindow(string paymentType, int paymentSum)
         {
             InitializeComponent();
+            proceedAmoutTbox.Text = 0.ToString();
             this.paymentType = paymentType;
             this.paymentSum = paymentSum;
+            GetClientsBalance();
+        }
+
+        public void GetClientsBalance()
+        {
+            using(var db = new AppDbContext())
+            {
+                clientBalance = db.Clients.Where(c => c.ClientId == AuthorizationWin.currentUser.Client.ClientId).Select(c => c.Balance).FirstOrDefault();
+            }
+
+            clientsBalanceTb.Text = $"Ваш баланс: {clientBalance}";
         }
 
         private string GenerateRandomString()
@@ -110,10 +123,10 @@ namespace fitness_club.Pages.ClientPages
         
         private void payBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(cardRb.IsChecked == true)
+            if (cardRb.IsChecked == true)
             {
                 if (string.IsNullOrWhiteSpace(cardNumberTb.Text) || string.IsNullOrWhiteSpace(cvvTb.Text) ||
-                string.IsNullOrWhiteSpace(expiryDateMonthTb.Text) || string.IsNullOrWhiteSpace(expiryDateYearTb.Text))
+                    string.IsNullOrWhiteSpace(expiryDateMonthTb.Text) || string.IsNullOrWhiteSpace(expiryDateYearTb.Text))
                 {
                     MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -125,12 +138,29 @@ namespace fitness_club.Pages.ClientPages
                         {
                             if (cvvTb.Text.Length == 3 && int.TryParse(cvvTb.Text, out int cvv) && cvv >= 1 && cvv <= 999)
                             {
+                                using (var db = new AppDbContext())
+                                {
+                                    var clientId = AuthorizationWin.currentUser.Client.ClientId;
+
+                                    db.ClientTransactions.Add(new ClientTransaction
+                                    {
+                                        ClientId = clientId,
+                                        OperationDescription = $"Оплата: {paymentType}",
+                                        PaymentWay = "Карта",
+                                        Amount = -paymentSum,
+                                        TransactionType = "списание"
+                                    });
+
+                                    db.SaveChanges();
+                                }
+
                                 MessageBoxResult result = MessageBox.Show(
                                     $"Вы успешно оплатили {paymentType}!",
                                     "Успех",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Information);
-                                if(result == MessageBoxResult.OK)
+
+                                if (result == MessageBoxResult.OK)
                                 {
                                     PaymentSuccess = true;
                                     this.DialogResult = true;
@@ -149,13 +179,30 @@ namespace fitness_club.Pages.ClientPages
                     }
                 }
             }
-            else if(qrCodeRb.IsChecked == true)
+            else if (qrCodeRb.IsChecked == true)
             {
+                using (var db = new AppDbContext())
+                {
+                    var clientId = AuthorizationWin.currentUser.Client.ClientId;
+
+                    db.ClientTransactions.Add(new ClientTransaction
+                    {
+                        ClientId = clientId,
+                        OperationDescription = $"Оплата: {paymentType}",
+                        PaymentWay = "QR-код",
+                        Amount = -paymentSum,
+                        TransactionType = "списание"
+                    });
+
+                    db.SaveChanges();
+                }
+
                 MessageBoxResult result = MessageBox.Show(
-                                    $"Вы успешно оплатили {paymentType}!",
-                                    "Успех",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Information);
+                    $"Вы успешно оплатили {paymentType}!",
+                    "Успех",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
                 if (result == MessageBoxResult.OK)
                 {
                     PaymentSuccess = true;
@@ -167,7 +214,8 @@ namespace fitness_club.Pages.ClientPages
             {
                 MessageBox.Show("Пожалуйста, выберите способ оплаты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
+
         }
 
         public bool CheckExpirationDate()
@@ -229,19 +277,111 @@ namespace fitness_club.Pages.ClientPages
             switch (selectedRadio.Name)
             {
                 case "cardRb":
+                    payByBalanceSp.Visibility = Visibility.Collapsed;
                     payByQRCodeSp.Visibility = Visibility.Collapsed;
                     payByCardSp.Visibility = Visibility.Visible;
                     payBtn.Visibility = Visibility.Visible;
                     payBtn.Content = $"Оплатить {paymentSum} руб.";
                     break;
                 case "qrCodeRb":
+                    payByBalanceSp.Visibility = Visibility.Collapsed;
                     payByCardSp.Visibility = Visibility.Collapsed;
                     GenerateRandomQrCode();
                     payByQRCodeSp.Visibility = Visibility.Visible;
                     payBtn.Visibility = Visibility.Visible;
                     payBtn.Content = $"Я оплатил {paymentSum} руб.";
                     break;
+                case "balanceRb":
+                    payByBalanceSp.Visibility = Visibility.Visible;
+                    payByCardSp.Visibility = Visibility.Collapsed;
+                    payByQRCodeSp.Visibility = Visibility.Collapsed;
+                    payBtn.Visibility = Visibility.Collapsed;
+                    payByBalanceBtn.Content = $"Оплатить {paymentSum} руб.";
+                    break;
             }
+        }
+
+        private void payByBalanceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!int.TryParse(proceedAmoutTbox.Text, out int proceedAmount) || proceedAmount <= 0)
+            {
+                MessageBox.Show("Некорректный ввод. Введите положительное число.");
+                return;
+            }
+
+            using var db = new AppDbContext();
+            var client = db.Clients
+                .FirstOrDefault(c => c.ClientId == AuthorizationWin.currentUser.Client.ClientId);
+
+            if (client == null)
+            {
+                MessageBox.Show("Клиент не найден.");
+                return;
+            }
+
+            if (proceedAmount > client.Balance)
+            {
+                MessageBox.Show("У вас недостаточно средств на балансе.");
+                return;
+            }
+
+            if (paymentSum > proceedAmount) // Частичная оплата
+            {
+                paymentSum -= proceedAmount;
+                client.Balance -= proceedAmount;
+
+                db.ClientTransactions.Add(new ClientTransaction
+                {
+                    ClientId = client.ClientId,
+                    OperationDescription = $"Частичная оплата: {paymentType}",
+                    PaymentWay = "С баланса",
+                    Amount = -proceedAmount,
+                    TransactionType = "списание"
+                });
+
+                db.SaveChanges();
+
+                MessageBox.Show($"Списано {proceedAmount} руб. Остаток: {client.Balance} руб. " +
+                                "Для оплаты оставшейся части заказа выберите другой способ оплаты!");
+                payByBalanceBtn.Content = $"Оплатить {paymentSum} руб.";
+            }
+            else // Полная оплата
+            {
+                client.Balance -= paymentSum;
+
+                db.ClientTransactions.Add(new ClientTransaction
+                {
+                    ClientId = client.ClientId,
+                    OperationDescription = $"Полная оплата: {paymentType}",
+                    PaymentWay = "С баланса",
+                    Amount = -paymentSum,
+                    TransactionType = "списание"
+                });
+
+                db.SaveChanges();
+
+                MessageBox.Show($"Списано {paymentSum} руб. Остаток: {client.Balance} руб.");
+
+                MessageBoxResult result = MessageBox.Show(
+                    $"Вы успешно оплатили {paymentType}! С баланса списано {paymentSum} руб.\nОстаток: {client.Balance} руб.",
+                    "Успешная оплата",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
+                if (result == MessageBoxResult.OK)
+                {
+                    PaymentSuccess = true;
+                    this.DialogResult = true;
+                    this.Close();
+                }
+            }
+        }
+
+
+
+        private void fullAmountOfPrice_Click(object sender, RoutedEventArgs e)
+        {
+            proceedAmoutTbox.Text = paymentSum.ToString();
         }
     }
 }

@@ -57,5 +57,8 @@ namespace fitness_club.Classes
         [Column("add_author_name")]
         public bool IsAddAuthorName { get; set; }
 
+        [Column("balance")]
+        public decimal Balance { get; set; }
+
     }
 }

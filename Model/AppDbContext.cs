@@ -33,6 +33,7 @@ namespace fitness_club.Model
         public DbSet<MembershipPayments> MembershipPayments { get; set; }
         public DbSet<ServicesPayments> ServicesPayments { get; set; }
         public DbSet<TrainingPlan> TrainingPlans { get; set; }
+        public DbSet<ClientTransaction> ClientTransactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

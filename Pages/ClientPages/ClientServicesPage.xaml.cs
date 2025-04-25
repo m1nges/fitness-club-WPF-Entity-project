@@ -521,44 +521,72 @@ namespace fitness_club.Pages.ClientPages
 
         private void CancelServiceClassContext_Click(object sender, RoutedEventArgs e)
         {
-
             if (sender is MenuItem menuItem && menuItem.CommandParameter is int serviceId)
             {
                 try
                 {
                     using (var db = new AppDbContext())
                     {
-                        var membershipServices = db.MembershipServices
-                            .FirstOrDefault(ms => ms.ServiceId == serviceId);
+                        var clientId = AuthorizationWin.currentUser.Client.ClientId;
 
-                        if(membershipServices.ProvisionDate > todayUtc)
+                        var membershipService = db.MembershipServices
+                            .FirstOrDefault(ms => ms.ServiceId == serviceId && ms.ClientMembershipId == clientMemberShipId);
+
+                        if (membershipService == null)
                         {
-                            var paymentsToDelete = db.ServicesPayments
-                                .Where(sp => sp.ServiceId == serviceId && sp.ClientId == AuthorizationWin.currentUser.Client.ClientId)
-                                .ToList();
+                            MessageBox.Show("Услуга не найдена.");
+                            return;
+                        }
 
-                            db.ServicesPayments.RemoveRange(paymentsToDelete);
+                        if (membershipService.ProvisionDate <= todayUtc)
+                        {
+                            MessageBox.Show("Нельзя отменить услугу, которая уже использована.");
+                            return;
+                        }
 
-                            if (membershipServices != null)
+                        var payment = db.ServicesPayments
+                            .Include(sp => sp.Service)
+                            .FirstOrDefault(sp => sp.ServiceId == serviceId && sp.ClientId == clientId);
+
+
+                        if (payment != null)
+                        {
+                            if (payment.PaymentDate != null)
                             {
-                                db.MembershipServices.Remove(membershipServices);
-                                db.SaveChanges();
-                                LoadClientsServices(servicesHistoryComboBox.SelectedIndex);
-                                MessageBox.Show("Услуга успешно отменена.", "Успех",
-                                    MessageBoxButton.OK, MessageBoxImage.Information);
+                                // Возврат на баланс
+                                var client = db.Clients.FirstOrDefault(c => c.ClientId == clientId);
+                                if (client != null)
+                                {
+                                    client.Balance += (decimal)payment.Price;
+
+                                    db.ClientTransactions.Add(new ClientTransaction
+                                    {
+                                        ClientId = client.ClientId,
+                                        OperationDescription = $"Возврат за отмену услуги: {payment.Service.ServiceName}",
+                                        PaymentWay = "На баланс",
+                                        Amount = (decimal)payment.Price,
+                                        TransactionType = "возврат"
+                                    });
+                                }
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Вы не можете отменить услугу, которая уже была использована.", "Ошибка",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
+
+                            db.ServicesPayments.Remove(payment);
                         }
 
+                        db.MembershipServices.Remove(membershipService);
+                        db.SaveChanges();
+
+                        LoadClientsServices(servicesHistoryComboBox.SelectedIndex);
+                        LoadAvailableServices();
+                        LoadAvailableServicesByMemberShip();
+
+                        MessageBox.Show("Услуга успешно отменена.", "Успех",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Произошла ошибка при отмене услуги: {ex.Message}", "Ошибка",
+                    MessageBox.Show($"Ошибка при отмене услуги: {ex.Message}", "Ошибка",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -567,10 +595,8 @@ namespace fitness_club.Pages.ClientPages
                 MessageBox.Show("Пожалуйста, выберите услугу для отмены.", "Информация",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-            LoadAvailableServicesByMemberShip();
-            LoadAvailableServices();
         }
+
     }
 }
 

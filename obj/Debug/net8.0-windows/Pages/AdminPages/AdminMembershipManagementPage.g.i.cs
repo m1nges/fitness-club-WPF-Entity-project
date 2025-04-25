@@ -109,8 +109,7 @@ namespace fitness_club.Pages.AdminPages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/fitness-club;V1.0.0.0;component/pages/adminpages/adminmembershipmanagementpage.x" +
-                    "aml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/fitness-club;component/pages/adminpages/adminmembershipmanagementpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Pages\AdminPages\AdminMembershipManagementPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

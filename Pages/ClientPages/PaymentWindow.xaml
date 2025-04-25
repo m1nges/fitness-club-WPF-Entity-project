@@ -15,6 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10">
             <TextBlock Text="Выберите способ оплаты" FontSize="14" FontWeight="Bold" Margin="0 0 0 10"/>
+            <RadioButton x:Name="balanceRb" GroupName="payMethods" Content="Списать с баланса" Checked="payMethods_Checked" Margin="0 0 0 7"/>
             <RadioButton x:Name="cardRb" GroupName="payMethods" Content="Банковской картой" Margin="0 0 0 7" Checked="payMethods_Checked"/>
             <RadioButton x:Name="qrCodeRb" GroupName="payMethods" Content="QR-кодом" Checked="payMethods_Checked"/>
         </StackPanel>
@@ -63,5 +64,17 @@
             </StackPanel>
         </StackPanel>
         <Button Grid.Column="1" x:Name="payBtn" Content="Я оплатил сумма" Click="payBtn_Click" Width="120" Height="20" VerticalAlignment="Bottom" Margin="0 15 0 40" Visibility="Collapsed"/>
+
+        <StackPanel x:Name="payByBalanceSp" Grid.Column="1" Margin="0 10 0 0" Visibility="Collapsed">
+            <TextBlock Text="Ваш баланс: " x:Name="clientsBalanceTb"/>
+            <TextBlock Text="Какую сумму вы хотите списать с баланса?"/>
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <TextBox Width="95"  HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="proceedAmoutTbox"/>
+                <Button x:Name="fullAmountOfPrice" Height="24" Click="fullAmountOfPrice_Click" Margin="10 0 0 0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0">
+                    <Image Source="../../../Images/all.png"/>
+                </Button>
+            </StackPanel>
+            <Button Content="Оплатить руб" x:Name="payByBalanceBtn" Click="payByBalanceBtn_Click" Width="120" Height="20" Margin="0 10 0 0"/>
+        </StackPanel>
     </Grid>
 </Window>
