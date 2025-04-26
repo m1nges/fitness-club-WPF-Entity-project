@@ -1,5 +1,5 @@
 ﻿
-
+FE:\fitness-club\App.xaml;;
 FE:\fitness-club\MainWindow.xaml;;
 FE:\fitness-club\Pages\AdminPage.xaml;;
 FE:\fitness-club\Pages\AdminPages\AdminEquipmentManagementPage.xaml;;
@@ -12,18 +12,15 @@ FE:\fitness-club\Pages\AdminPages\AdminWorkSchedulePage.xaml;;
 FE:\fitness-club\Pages\AdminPages\AssignEquipmentWindow.xaml;;
 FE:\fitness-club\Pages\AdminPages\EditGroupClassWindow.xaml;;
 FE:\fitness-club\Pages\ClientPage.xaml;;
-FE:\fitness-club\Pages\ClientPages\ClassDetailsWindow.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientEquipmentGuidePage.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientMembershipPage.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientPageRecommendations.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientPaymentPage.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientProfilePage.xaml;;
-FE:\fitness-club\Pages\ClientPages\ClientSchedulePage.xaml;;
-FE:\fitness-club\Pages\ClientPages\ClientServicesPage.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientTrainerDetailsWindow.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientTrainerListPage.xaml;;
+FE:\fitness-club\Pages\ClientPages\ClientTrainingPlanFromTrainer.xaml;;
 FE:\fitness-club\Pages\ClientPages\ClientVisitsPage.xaml;;
-FE:\fitness-club\Pages\ClientPages\PaymentWindow.xaml;;
 FE:\fitness-club\Pages\TrainerPage.xaml;;
 FE:\fitness-club\Pages\TrainerPages\ClassVisitorsListPage.xaml;;
 FE:\fitness-club\Pages\TrainerPages\TrainerClassesPage.xaml;;
@@ -31,9 +28,9 @@ FE:\fitness-club\Pages\TrainerPages\TrainerClientsPage.xaml;;
 FE:\fitness-club\Pages\TrainerPages\TrainerPastClassesPage.xaml;;
 FE:\fitness-club\Pages\TrainerPages\TrainerProfilePage.xaml;;
 FE:\fitness-club\Pages\TrainerPages\TrainerReviewsPage.xaml;;
+FE:\fitness-club\Pages\TrainerPages\TrainerWorkSchedule.xaml;;
 FE:\fitness-club\Pages\TrainerPages\WritePlanWindow.xaml;;
 FE:\fitness-club\Windows\AuthorizationWin.xaml;;
 FE:\fitness-club\Windows\RegistrationWin.xaml;;
-FE:\fitness-club\Pages\ClientPages\ClientTrainingPlanFromTrainer.xaml;;
-FE:\fitness-club\Pages\TrainerPages\TrainerWorkSchedule.xaml;;
+FE:\fitness-club\Pages\ClientPages\ClientServicesPage.xaml;;
 

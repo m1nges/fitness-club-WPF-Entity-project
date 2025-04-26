@@ -7,23 +7,30 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="800"
       Title="AdminEquipmentManagementPage"
-      Background="white">
+      Background="{StaticResource GlobalPageBackground}">
 
-    <StackPanel Margin="20">
+    <StackPanel Margin="20" Orientation="Vertical">
 
-        <TextBlock Text="Управление оборудованием" FontSize="22" FontWeight="Bold" Margin="0 0 0 15"/>
+        <TextBlock Text="Управление оборудованием" FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 0 0 20"/>
 
-        <DataGrid x:Name="EquipmentGrid" AutoGenerateColumns="False" Height="350"
-                  CanUserAddRows="False" IsReadOnly="False" Margin="0 0 0 15">
-
+        <DataGrid x:Name="EquipmentGrid"
+                  AutoGenerateColumns="False"
+                  Height="350"
+                  CanUserAddRows="False"
+                  IsReadOnly="False"
+                  Background="White"
+                  GridLinesVisibility="Horizontal"
+                  BorderBrush="#8A2BE2"
+                  BorderThickness="1"
+                  Margin="0 0 0 20">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding EquipmentName}" IsReadOnly="True" Width="180"/>
                 <DataGridComboBoxColumn Header="Состояние"
-                            SelectedValueBinding="{Binding EquipmentConditionId}"
-                            SelectedValuePath="EquipmentConditionId"
-                            DisplayMemberPath="EquipmentConditionDescription"
-                            Width="150"
-                            x:Name="ConditionColumn"/>
+                                        SelectedValueBinding="{Binding EquipmentConditionId}"
+                                        SelectedValuePath="EquipmentConditionId"
+                                        DisplayMemberPath="EquipmentConditionDescription"
+                                        Width="150"
+                                        x:Name="ConditionColumn"/>
                 <DataGridTextColumn Header="Поставка" Binding="{Binding DeliveryDate}" IsReadOnly="True" Width="120"/>
                 <DataGridTextColumn Header="ТО" Binding="{Binding LastMaintenanceDate}" Width="120"/>
                 <DataGridTextColumn Header="Кол-во" Binding="{Binding Quantity}" Width="80"/>
@@ -31,43 +38,41 @@
                 <DataGridTemplateColumn Header="Распределение" Width="180">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Открыть окно" Click="AssignEquipment_Click" Tag="{Binding EquipmentId}"
-                        Padding="4" HorizontalAlignment="Center"/>
+                            <Button Content="Открыть окно" Padding="4" HorizontalAlignment="Center"
+                                    Click="AssignEquipment_Click" Tag="{Binding EquipmentId}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
                 <DataGridTemplateColumn Header="Удалить" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="❌" Tag="{Binding EquipmentId}" Click="DeleteEquipment_Click" Padding="4" HorizontalAlignment="Center"/>
+                            <Button Content="❌" Padding="4" HorizontalAlignment="Center"
+                                    Click="DeleteEquipment_Click" Tag="{Binding EquipmentId}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Сохранить изменения" Padding="8" Width="200" Click="SaveChanges_Click" HorizontalAlignment="Left"/>
-        </Grid>
 
-        <StackPanel Margin="0,20,0,0">
-            <TextBlock Text="Добавить новое оборудование" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+        <Button Content="Сохранить изменения" Width="200" Padding="8" Click="SaveChanges_Click" HorizontalAlignment="Left"/>
+
+        <Separator Margin="20 20 0 20"/>
+
+        <StackPanel Margin="0 10 0 0" Orientation="Vertical">
+            <TextBlock Text="Добавить новое оборудование" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 0 0 20"/>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Text="Название:" VerticalAlignment="Center" Margin="0 0 5 0"/>
-                <TextBox x:Name="NewEquipmentNameTb" Width="200" Margin="0 0 20 0"/>
+                <TextBlock Text="Название:" VerticalAlignment="Center" Foreground="White" Margin="0 0 5 0"/>
+                <TextBox x:Name="NewEquipmentNameTb" Width="200" Margin="0 0 20 0" Height="30"/>
 
-                <TextBlock Text="Количество:" VerticalAlignment="Center" Margin="0 0 5 0"/>
-                <TextBox x:Name="NewEquipmentQtyTb" Width="100" Margin="0 0 20 0"/>
+                <TextBlock Text="Количество:" VerticalAlignment="Center" Foreground="White" Margin="0 0 5 0"/>
+                <TextBox x:Name="NewEquipmentQtyTb" Width="100" Margin="0 0 20 0" Height="30"/>
 
-                <Button Content="Добавить оборудование" Click="AddEquipment_Click" Padding="8"/>
+                <Button Content="Добавить оборудование" Padding="8" Click="AddEquipment_Click"/>
             </StackPanel>
         </StackPanel>
 
     </StackPanel>
-    
-    
 </Page>

@@ -5,56 +5,70 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Background="white"
-      Title="ClientVisitsPage">
+      Background="{StaticResource GlobalPageBackground}"
+      Title="История посещений занятий" d:DesignHeight="764.535" d:DesignWidth="830.166">
 
-    <Grid>
-        <TextBlock Text="Мои посещения тренировок" FontSize="20" FontWeight="Bold" Margin="10 10 0 20" />
-        <ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="850" Margin="20 45 20 30">
-            <StackPanel>
-                <ListView x:Name="ClientVisitsList" MouseDoubleClick="ClientVisitsList_MouseDoubleClick" SelectionMode="Single">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="Margin" Value="0 2"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Background="Transparent" Padding="0">
-                                <Border.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Вернуть средства" Click="RefundVisitContext_Click" CommandParameter="{Binding ClassId}" />
-                                    </ContextMenu>
-                                </Border.ContextMenu>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Margin="10">
-                                        <TextBlock Text="{Binding ClassName}" FontWeight="Bold" FontSize="14"/>
-                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                            <TextBlock Text="{Binding Date, StringFormat='Дата: {0:dd.MM.yyyy} | '}"/>
-                                            <TextBlock Text="{Binding Time, StringFormat='Время: {0} | '}"/>
-                                            <TextBlock Text="{Binding HallName, StringFormat='Зал: {0}'}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                            <TextBlock Text="{Binding TrainerName, StringFormat='Тренер: {0}'}"/>
-                                        </StackPanel>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Мои посещения тренировок" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 0 0 10"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="850">
+            <ListView x:Name="ClientVisitsList" MouseDoubleClick="ClientVisitsList_MouseDoubleClick" SelectionMode="Single">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0 5"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#7B68EE"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="8" Background="#E0E0F8" Padding="10" Margin="5 2">
+                            <Border.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Вернуть средства" Click="RefundVisitContext_Click" CommandParameter="{Binding ClassId}" />
+                                </ContextMenu>
+                            </Border.ContextMenu>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                    <TextBlock Text="{Binding ClassName}" FontWeight="Bold" FontSize="14" Foreground="Black"/>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                        <TextBlock Text="{Binding Date, StringFormat='Дата: {0:dd.MM.yyyy} | '}" Foreground="Black"/>
+                                        <TextBlock Text="{Binding Time, StringFormat='Время: {0} | '}" Foreground="Black"/>
+                                        <TextBlock Text="{Binding HallName, StringFormat='Зал: {0}'}" Foreground="Black"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10">
-                                        <TextBlock Text="{Binding Visited, StringFormat='Посещено: {0}'}" FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" FontWeight="Bold"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
+
+                                    <TextBlock Text="{Binding TrainerName, StringFormat='Тренер: {0}'}" Margin="0,5,0,0" Foreground="Black"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Visited, StringFormat='Посещено: {0}'}" FontWeight="Bold" Foreground="Black"/>
+                                    <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" FontWeight="Bold" Foreground="Black"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </ScrollViewer>
     </Grid>
 </Page>

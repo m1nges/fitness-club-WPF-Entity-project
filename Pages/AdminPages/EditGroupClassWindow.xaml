@@ -5,33 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club.Pages.AdminPages"
         mc:Ignorable="d"
-        Title="EditGroupClassWindow" Height="450" Width="800">
-    <Grid Margin="15">
+        Title="EditGroupClassWindow" Height="450" Width="800"
+        Background="{StaticResource GlobalPageBackground}"
+        d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 10">
-                <TextBlock Text="Тренер:" Width="80" VerticalAlignment="Center"/>
-                <ComboBox x:Name="TrainerComboBox" Width="250" DisplayMemberPath="FullName" SelectedValuePath="TrainerId"/>
+        <!-- Верхняя форма -->
+        <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0 0 0 20">
+
+            <TextBlock Text="Редактирование группового занятия" 
+                       FontSize="22" FontWeight="Bold" Foreground="White" Margin="0 0 0 20" 
+                       HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 10" VerticalAlignment="Center">
+                <TextBlock Text="Тренер:" Width="120" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <ComboBox x:Name="TrainerComboBox" Width="250" 
+                          DisplayMemberPath="FullName" SelectedValuePath="TrainerId"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0 10">
-                <TextBlock Text="Дата:" Width="80" VerticalAlignment="Center"/>
-                <DatePicker x:Name="DatePicker" Width="150"/>
+            <StackPanel Orientation="Horizontal" Margin="0 10" VerticalAlignment="Center">
+                <TextBlock Text="Дата:" Width="120" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DatePicker" Width="180"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0 10">
-                <TextBlock Text="Начало:" Width="80" VerticalAlignment="Center"/>
-                <TextBox x:Name="StartTimeBox" Width="80" ToolTip="формат: HH:mm"/>
-                <TextBlock Text="  Конец:" Margin="10 0 5 0" VerticalAlignment="Center"/>
-                <TextBox x:Name="EndTimeBox" Width="80" ToolTip="формат: HH:mm"/>
+            <StackPanel Orientation="Horizontal" Margin="0 10" VerticalAlignment="Center">
+                <TextBlock Text="Начало:" Width="120" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <TextBox x:Name="StartTimeBox" Width="100" HorizontalContentAlignment="Center" ToolTip="Формат: HH:mm"/>
+
+                <TextBlock Text="Конец:" Margin="20 0 5 0" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <TextBox x:Name="EndTimeBox" Width="100" HorizontalContentAlignment="Center" ToolTip="Формат: HH:mm"/>
             </StackPanel>
+
         </StackPanel>
 
-        <Button Content="Сохранить изменения" Grid.Row="1" Width="180" HorizontalAlignment="Right" Margin="0 15 0 0"
+        <!-- Кнопка -->
+        <Button Grid.Row="1" Content="Сохранить изменения" 
+                Width="200" Height="40"
+                Margin="0 20 0 0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Click="SaveButton_Click"/>
     </Grid>
 </Window>

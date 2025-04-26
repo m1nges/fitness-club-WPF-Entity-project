@@ -6,19 +6,63 @@
       xmlns:local="clr-namespace:fitness_club.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="800"
-      Background="white"
-      Title="ClientPage">
+      Background="{StaticResource GlobalPageBackground}"
+      Title="Клиент">
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#7B68EE"/>
+            <Setter Property="BorderBrush" Value="#8A2BE2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#6A5ACD"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#5A4ABE"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#FFB6B6"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
         <Grid Background="LightGray">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
+
             <StackPanel Grid.Column="0" Grid.Row="0">
                 <Button Content="Профиль" Margin="10 10 10 10" Click="ProfileBtn_Click"/>
                 <Button Content="Абонементы" Margin="10 0 10 10" Click="MembershipBtn_Click"/>
@@ -27,31 +71,32 @@
                 <Button Content="Услуги" Margin="10 0 10 10" Click="ServicesBtn_Click"/>
                 <Button Content="Советы клиентам" Margin="10 0 10 10" Click="RecommendationBtn_Click"/>
                 <Button Margin="10 0 10 10" Click="EquipmentGuidePageBtn_Click">
-                    <TextBlock TextAlignment="center" Text="Тренажеры и инструкция по эксплуатации" TextWrapping="Wrap"/>
+                    <TextBlock TextAlignment="Center" Text="Тренажеры и инструкция по эксплуатации" TextWrapping="Wrap"/>
                 </Button>
                 <Button Content="Наши тренеры" Margin="10 0 10 10" Click="TrainersBtn_Click"/>
                 <Button Content="Страница оплаты" Margin="10 0 10 10" Click="PaymentBtn_Click"/>
                 <Button Content="Транзакции клиента" Margin="10 0 10 10" Click="TransactionsBtn_Click"/>
-                <Button  Margin="10 0 10 10" Click="TrainingPlanBtn_Click">
+                <Button Margin="10 0 10 10" Click="TrainingPlanBtn_Click">
                     <TextBlock Text="План тренировок, полученный от тренера" TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
             </StackPanel>
-            
+
             <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">
-                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
                     <Image Source="../Images/user.png" Width="24" Height="24" Margin="5 0 0 0"/>
                     <TextBlock x:Name="userName" Text="Имяяяяя Фамилия Отчетство" TextAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="center">
-                    <Button Background="Transparent" Width="34" Height="34" BorderThickness="0" x:Name="logoutBtn" Click="logoutBtn_Click"  VerticalAlignment="Bottom" Margin="10 0 10 0">
-                        <Image Source="../Images/logout.png" Width="32" Height="32"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Background="Transparent" Width="34" Height="34" BorderThickness="0" x:Name="logoutBtn" Click="logoutBtn_Click">
+                        <Image Source="../Images/logout.png" Width="24" Height="24"/>
                     </Button>
-                    <Button Background="Transparent" Width="34" Height="34" BorderThickness="0" x:Name="exitBtn" Click="exitBtn_Click"  VerticalAlignment="Bottom" Margin="10 0 10 0">
-                        <Image Source="../Images/exit.png" Width="32" Height="32"/>
+                    <Button Background="Transparent" Width="34" Height="34" BorderThickness="0" x:Name="exitBtn" Click="exitBtn_Click">
+                        <Image Source="../Images/exit.png" Width="24" Height="24"/>
                     </Button>
                 </StackPanel>
             </StackPanel>
         </Grid>
+
         <Frame x:Name="ClientFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

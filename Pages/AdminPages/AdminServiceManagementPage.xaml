@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="800"
       Title="AdminServiceManagementPage"
-      Background="white">
+      Background="{StaticResource GlobalPageBackground}">
 
     <StackPanel Margin="20">
 

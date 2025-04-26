@@ -6,20 +6,76 @@
       xmlns:local="clr-namespace:fitness_club.Pages.TrainerPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClassVisitorsListPage"
-      Background="White">
+      Title="Участники занятия"
+      Background="{StaticResource GlobalPageBackground}">
 
-    <StackPanel Margin="10" Orientation="Vertical">
+    <Page.Resources>
+        <!-- Стиль для кнопок -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#7B68EE"/>
+            <Setter Property="BorderBrush" Value="#8A2BE2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#6A5ACD"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#5A4ABE"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#FFB6B6"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#E0E0F8"/>
+            <Setter Property="BorderBrush" Value="#8A2BE2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="RowBackground" Value="#D8BFD8"/>
+            <Setter Property="AlternatingRowBackground" Value="#E6E6FA"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#8A2BE2"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#8A2BE2"/>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Margin="20" Orientation="Vertical">
         <TextBlock Text="Участники занятия" 
                    x:Name="classNameTb"
                    FontSize="20" FontWeight="Bold" 
-                   DockPanel.Dock="Top" Margin="0,0,0,10"/>
+                   Foreground="White"
+                   Margin="0 0 0 10"/>
 
         <DataGrid x:Name="VisitorsDataGrid"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
-                  RowHeight="20"
-                  Margin="0,0,0,10">
+                  RowHeight="30"
+                  Margin="0 0 0 10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ФИО" 
                                     Binding="{Binding FullName}"
@@ -30,18 +86,14 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Сохранить" 
-                Click="SaveButton_Click"
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Center"
-                Width="120" Padding="5"
-                Margin="0 20 0 0"/>
-        
-        <Button Content="Назад" 
-        Click="BackButton_Click"
-        VerticalAlignment="Bottom" 
-        HorizontalAlignment="Center"
-        Width="120" Padding="5"
-        Margin="0 20 0 0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+            <Button Content="Сохранить" 
+                    Click="SaveButton_Click"
+                    Width="140"/>
+
+            <Button Content="Назад" 
+                    Click="BackButton_Click"
+                    Width="140"/>
+        </StackPanel>
     </StackPanel>
 </Page>

@@ -4,36 +4,45 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClientTrainerListPage">
+      mc:Ignorable="d"
+      Background="{StaticResource GlobalPageBackground}"
+      Title="Наши тренеры" d:DesignHeight="698.257" d:DesignWidth="897.755">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White">
-            <StackPanel Margin="20">
-                <TextBlock Text="Наши тренеры" FontSize="24" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"/>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Наши тренеры" FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 0 0 20" HorizontalAlignment="Center"/>
 
-                <ItemsControl x:Name="TrainersItemsControl">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+            <ItemsControl x:Name="TrainersItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="10" Margin="10" Padding="10"
-                                Width="220" PreviewMouseLeftButtonDown="TrainerCard_Click" Cursor="Hand">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="2"
+                                BorderBrush="#8A2BE2"
+                                Background="#E0E0F8"
+                                CornerRadius="12"
+                                Margin="10"
+                                Padding="10"
+                                Width="220"
+                                PreviewMouseLeftButtonDown="TrainerCard_Click"
+                                Cursor="Hand">
+
                             <StackPanel>
                                 <Image Source="{Binding Photo}" Height="100" Margin="0 0 0 10" Stretch="UniformToFill"/>
-                                <TextBlock Text="{Binding FullName, StringFormat=Имя тренера: {0}}" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding AverageRating, StringFormat=Средняя оценка: {0:F1}}" Margin="0 5 0 0" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding Specialization, StringFormat=Специализация: {0}}" TextWrapping="Wrap" Margin="0 5 0 0"/>
-                                <TextBlock Text="{Binding Experience, StringFormat=Стаж работы: {0}}" TextWrapping="Wrap" Margin="0 5 0 0"/>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </ScrollViewer>
-    </Page>
+                                <TextBlock Text="{Binding FullName, StringFormat=Имя тренера: {0}}" TextWrapping="Wrap" FontWeight="Bold" Foreground="Black"/>
+                                <TextBlock Text="{Binding AverageRating, StringFormat=Средняя оценка: {0:F1}}" Margin="0 5 0 0" TextWrapping="Wrap" Foreground="Black"/>
+                                <TextBlock Text="{Binding Specialization, StringFormat=Специализация: {0}}" TextWrapping="Wrap" Margin="0 5 0 0" Foreground="Black"/>
+                                <TextBlock Text="{Binding Experience, StringFormat=Стаж работы: {0}}" TextWrapping="Wrap" Margin="0 5 0 0" Foreground="Black"/>
+                            </StackPanel>
+
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

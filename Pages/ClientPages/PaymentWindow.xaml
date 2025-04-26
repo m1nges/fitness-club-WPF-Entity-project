@@ -1,80 +1,118 @@
 ﻿<Window x:Class="fitness_club.Pages.ClientPages.PaymentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
-        mc:Ignorable="d"
-        d:Width="500"
-        d:Height="250"
-        Title="PaymentWindow" MaxHeight="250" MaxWidth="500">
-    <Grid>
+        Title="Оплата услуги" Height="320" Width="700"
+        MaxHeight="400" MaxWidth="700"
+        Background="{StaticResource GlobalPageBackground}"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
         <StackPanel Grid.Column="0" Margin="10">
-            <TextBlock Text="Выберите способ оплаты" FontSize="14" FontWeight="Bold" Margin="0 0 0 10"/>
-            <RadioButton x:Name="balanceRb" GroupName="payMethods" Content="Списать с баланса" Checked="payMethods_Checked" Margin="0 0 0 7"/>
-            <RadioButton x:Name="cardRb" GroupName="payMethods" Content="Банковской картой" Margin="0 0 0 7" Checked="payMethods_Checked"/>
-            <RadioButton x:Name="qrCodeRb" GroupName="payMethods" Content="QR-кодом" Checked="payMethods_Checked"/>
+            <TextBlock Text="Выберите способ оплаты" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0 0 0 10"/>
+
+            <RadioButton x:Name="balanceRb" GroupName="payMethods" Content="Списать с баланса" Checked="payMethods_Checked"
+                         Foreground="White" Margin="0 0 0 7"/>
+            <RadioButton x:Name="cardRb" GroupName="payMethods" Content="Банковской картой" Checked="payMethods_Checked"
+                         Foreground="White" Margin="0 0 0 7"/>
+            <RadioButton x:Name="qrCodeRb" GroupName="payMethods" Content="QR-кодом" Checked="payMethods_Checked"
+                         Foreground="White"/>
         </StackPanel>
-        <StackPanel x:Name="payByCardSp" Grid.Column="1" Margin="0 10 0 0" Visibility="Collapsed">
-            <TextBlock Text="Введите данные карты" FontSize="14" FontWeight="Bold" Margin="0 0 0 10"/>
 
-            <!-- Номер карты -->
-            <Grid Margin="0 0 10 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Номер карты:" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" x:Name="cardNumberTb" Margin="5 0 0 0" MaxLength="19"/>
-            </Grid>
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <!-- Срок действия -->
-            <Grid Margin="0 0 10 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Срок действия:" VerticalAlignment="Center"/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5 0 0 0">
-                    <TextBox x:Name="expiryDateMonthTb" MinWidth="25" MaxLength="2"/>
-                    <TextBlock Text="/" VerticalAlignment="Center" Margin="5 0 0 0"/>
-                    <TextBox x:Name="expiryDateYearTb" MinWidth="25" Margin="5 0 0 0" MaxLength="2"/>
+            <StackPanel Grid.Row="0">
+
+                <!-- Оплата картой -->
+                <StackPanel x:Name="payByCardSp" Visibility="Collapsed">
+                    <TextBlock Text="Введите данные карты" FontSize="14" FontWeight="Bold" Foreground="White" Margin="0 0 0 10"/>
+
+                    <Grid Margin="0 0 10 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Номер карты:" VerticalAlignment="Center" Foreground="White"/>
+                        <Border Grid.Column="1" CornerRadius="6" BorderBrush="#8A2BE2" BorderThickness="2" Background="#E0E0F8" Margin="5 0 0 0">
+                            <TextBox x:Name="cardNumberTb" BorderThickness="0" Background="Transparent" Foreground="Black" MaxLength="19" Padding="5"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Margin="0 0 10 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Срок действия:" VerticalAlignment="Center" Foreground="White"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5 0 0 0">
+                            <Border CornerRadius="6" BorderBrush="#8A2BE2" BorderThickness="2" Background="#E0E0F8">
+                                <TextBox x:Name="expiryDateMonthTb" Width="30" BorderThickness="0" Background="Transparent" Foreground="Black" MaxLength="2" Padding="5"/>
+                            </Border>
+                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="White" Margin="5 0"/>
+                            <Border CornerRadius="6" BorderBrush="#8A2BE2" BorderThickness="2" Background="#E0E0F8" Margin="5 0 0 0">
+                                <TextBox x:Name="expiryDateYearTb" Width="30" BorderThickness="0" Background="Transparent" Foreground="Black" MaxLength="2" Padding="5"/>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0 0 10 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="CVV/CVC:" VerticalAlignment="Center" Foreground="White"/>
+                        <Border Grid.Column="1" CornerRadius="6" BorderBrush="#8A2BE2" BorderThickness="2" Background="#E0E0F8" Margin="5 0 0 0">
+                            <TextBox x:Name="cvvTb" BorderThickness="0" Background="Transparent" Foreground="Black" MaxLength="3" Padding="5"/>
+                        </Border>
+                    </Grid>
                 </StackPanel>
-            </Grid>
 
-            <!-- CVV/CVC -->
-            <Grid Margin="0 0 10 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="CVV/CVC:" VerticalAlignment="Center"/>
-                <TextBox MaxLength="3" Grid.Column="1" x:Name="cvvTb" Margin="5 0 0 0"/>
-            </Grid>
+                <!-- Оплата через QR -->
+                <StackPanel x:Name="payByQRCodeSp" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0 10 0 10">
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="QrCodeImage" Width="150" Height="150"/>
+                        <Button Content="🔄" Width="24" Height="24" Click="GenerateQr_Click"
+                                Background="Transparent" BorderThickness="0" FontSize="16" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Оплата с баланса -->
+                <StackPanel x:Name="payByBalanceSp" Visibility="Collapsed" Margin="0 10 0 0">
+                    <TextBlock Text="Ваш баланс:" x:Name="clientsBalanceTb" Foreground="White"/>
+                    <TextBlock Text="Какую сумму хотите списать?" Foreground="White" Margin="0 5 0 5"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Border CornerRadius="6" BorderBrush="#8A2BE2" BorderThickness="2" Background="#E0E0F8">
+                            <TextBox Width="95" x:Name="proceedAmoutTbox" BorderThickness="0" Background="Transparent" Foreground="Black"
+                                     TextChanged="proceedAmoutTbox_TextChanged" Padding="5"/>
+                        </Border>
+                        <Button x:Name="fullAmountOfPrice" Width="30" Height="30" Click="fullAmountOfPrice_Click"
+                                Background="Transparent" BorderThickness="0" Margin="5 0 0 0">
+                            <Image Source="../../../Images/all.png" Width="24" Height="24"/>
+                        </Button>
+                    </StackPanel>
+
+                    <Button Content="Оплатить" x:Name="payByBalanceBtn" Width="150" Height="30" Click="payByBalanceBtn_Click"
+                            Background="#7B68EE" BorderBrush="#8A2BE2" Foreground="White" FontWeight="Bold" Margin="0 10 0 0"
+                            BorderThickness="2" />
+                </StackPanel>
+
             </StackPanel>
 
-            <StackPanel x:Name="payByQRCodeSp" Grid.Column="1" Margin="0 10 0 0" Visibility="Collapsed">
-            <StackPanel Height="auto" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Image x:Name="QrCodeImage" Width="150" Height="150"/>
-                <Button Content="🔄" Click="GenerateQr_Click" Width="24" FontSize="16" Background="Transparent" Height="24" BorderThickness="0" Margin="10 0 0 0"/>
-            </StackPanel>
-        </StackPanel>
-        <Button Grid.Column="1" x:Name="payBtn" Content="Я оплатил сумма" Click="payBtn_Click" Width="120" Height="20" VerticalAlignment="Bottom" Margin="0 15 0 40" Visibility="Collapsed"/>
-
-        <StackPanel x:Name="payByBalanceSp" Grid.Column="1" Margin="0 10 0 0" Visibility="Collapsed">
-            <TextBlock Text="Ваш баланс: " x:Name="clientsBalanceTb"/>
-            <TextBlock Text="Какую сумму вы хотите списать с баланса?"/>
-            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBox Width="95"  HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="proceedAmoutTbox" TextChanged="proceedAmoutTbox_TextChanged"/>
-                <Button x:Name="fullAmountOfPrice" Height="24" Click="fullAmountOfPrice_Click" Margin="10 0 0 0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0">
-                    <Image Source="../../../Images/all.png"/>
-                </Button>
-            </StackPanel>
-            <Button Content="Оплатить руб" x:Name="payByBalanceBtn" Click="payByBalanceBtn_Click" Width="120" Height="20" Margin="0 10 0 0"/>
-        </StackPanel>
+            <!-- Кнопка "Я оплатил" -->
+            <Button x:Name="payBtn" Content="Я оплатил" Grid.Row="1"
+                    Width="150" Height="30" Margin="0 15 0 0"
+                    Visibility="Collapsed" Click="payBtn_Click"
+                    Background="#7B68EE" BorderBrush="#8A2BE2" Foreground="White" FontWeight="Bold" BorderThickness="2"
+                    HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

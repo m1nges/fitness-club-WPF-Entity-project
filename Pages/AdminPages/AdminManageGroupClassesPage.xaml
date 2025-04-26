@@ -1,94 +1,81 @@
-﻿<Page x:Class="fitness_club.Pages.AdminPages.AdminManageGroupClassesPage"
+﻿<Page x:Class="fitness_club.Pages.AdminPages.AdminMembershipManagementPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:fitness_club.Pages.AdminPages"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="841.459"
-      Title="AdminManageGroupClassesPage"
-      Background="white">
+      d:DesignHeight="900" d:DesignWidth="800"
+      Title="AdminMembershipManagementPage"
+      Background="{StaticResource GlobalPageBackground}">
 
-    <StackPanel Margin="20">
+    <StackPanel Margin="20" Orientation="Vertical">
 
-        <TextBlock Text="Создание группового занятия" FontSize="20" FontWeight="Bold" Margin="0 0 0 15"/>
+        <TextBlock Text="Управление абонементами" FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 0 0 20"/>
 
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-            <TextBlock Text="Тренер:" VerticalAlignment="Center" Margin="0 0 5 0"/>
-            <ComboBox x:Name="TrainerComboBox" Width="180" DisplayMemberPath="FullName" SelectedValuePath="TrainerId"/>
+        <DataGrid x:Name="MembershipGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Margin="0 0 0 20"
+                  Height="300"
+                  Background="White"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  BorderThickness="1"
+                  BorderBrush="#8A2BE2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding MembershipName}" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding MembershipTypeName}" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding MembershipDescription}" Width="250"/>
+                <DataGridTextColumn Header="Цена (₽)" Binding="{Binding Price}" Width="100"/>
+                <DataGridTextColumn Header="Длительность (мес)" Binding="{Binding DurationMonths}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
-            <TextBlock Text="Зал:" Margin="20 0 5 0" VerticalAlignment="Center"/>
-            <ComboBox x:Name="HallComboBox" Width="180" DisplayMemberPath="HallName" SelectedValuePath="HallId"/>
-        </StackPanel>
+        <Button Content="Сохранить изменения" Width="200" Padding="8" Margin="0 0 0 20" Click="SaveChanges_Click"/>
 
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-            <TextBlock Text="Тип занятия:" VerticalAlignment="Center" Margin="0 0 5 0"/>
-            <ComboBox x:Name="ClassInfoComboBox" Width="200" DisplayMemberPath="ClassName" SelectedValuePath="ClassInfoId"/>
+        <Separator Margin="0 10"/>
 
-            <TextBlock Text="Дата:" Margin="20 0 5 0" VerticalAlignment="Center"/>
-            <DatePicker x:Name="DatePicker" Width="150"/>
-        </StackPanel>
+        <Grid Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-            <TextBlock Text="Время начала:" Margin="0 0 5 0" VerticalAlignment="Center"/>
-            <TextBox x:Name="StartTimeBox" Width="80" ToolTip="формат: HH:mm"/>
+            <!-- Новая абонемент -->
+            <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                <TextBlock Text="Добавить абонемент" FontWeight="Bold" FontSize="18" Foreground="White" Margin="0 0 0 10"/>
 
-            <TextBlock Text="Время конца:" Margin="20 0 5 0" VerticalAlignment="Center"/>
-            <TextBox x:Name="EndTimeBox" Width="80" ToolTip="формат: HH:mm"/>
+                <TextBlock Text="Название:" Foreground="White"/>
+                <TextBox x:Name="NewMembershipNameBox" Margin="0 5 0 10"/>
 
-            <TextBlock Text="Кол-во мест:" Margin="20 0 5 0" VerticalAlignment="Center"/>
-            <TextBox x:Name="PeopleQtyBox" Width="80"/>
-            
-            <TextBlock Text="Цена занятия:" Margin="20 0 5 0" VerticalAlignment="Center"/>
-            <TextBox x:Name="priceBox" Width="80"/>
-        </StackPanel>
+                <TextBlock Text="Описание:" Foreground="White"/>
+                <TextBox x:Name="NewMembershipDescriptionBox" Margin="0 5 0 10"/>
 
-        <Button Content="Создать занятие" Padding="8" Width="200" HorizontalAlignment="Left"
-                Click="CreateClass_Click" Margin="0 0 0 20"/>
+                <TextBlock Text="Тип абонемента:" Foreground="White"/>
+                <ComboBox x:Name="MembershipTypeComboBox" Margin="0 5 0 10"
+                          DisplayMemberPath="MembershipTypeName"
+                          SelectedValuePath="MembershipTypeId"/>
 
-        <Separator Margin="0 10 0 10"/>
+                <TextBlock Text="Цена:" Foreground="White"/>
+                <TextBox x:Name="NewMembershipPriceBox" Margin="0 5 0 10"/>
 
-        <TextBlock Text="Существующие групповые занятия" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+                <Button Content="Добавить абонемент" Width="180" Padding="8" Click="AddMembership_Click"/>
+            </StackPanel>
 
-        <ListView x:Name="GroupClassesListView" Height="300">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date}" Width="80"/>
-                    <GridViewColumn Header="Время" DisplayMemberBinding="{Binding Time}" Width="80"/>
-                    <GridViewColumn Header="Занятие" DisplayMemberBinding="{Binding ClassName}" Width="160"/>
-                    <GridViewColumn Header="Тренер" DisplayMemberBinding="{Binding TrainerName}" Width="150"/>
-                    <GridViewColumn Header="Зал" DisplayMemberBinding="{Binding HallName}" Width="100"/>
-                    <GridViewColumn Header="Мест" DisplayMemberBinding="{Binding PeopleQty}" Width="60"/>
-                    <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}" Width="60"/>
-                    <GridViewColumn Header="Изменить">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="✏️" Padding="2" Click="EditClass_Click" Tag="{Binding ClassId}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Удалить">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="❌" Padding="2" Click="DeleteClass_Click" Tag="{Binding ClassId}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBlock Text="Свободные слоты тренеров (по сменам)" FontSize="18" FontWeight="Bold" Margin="0 20 0 10"/>
+            <!-- Новый тип абонемента -->
+            <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                <TextBlock Text="Добавить тип абонемента" FontWeight="Bold" FontSize="18" Foreground="White" Margin="0 0 0 10"/>
 
-        <ListView x:Name="FreeSlotsListView" MouseDoubleClick="FreeSlotsListView_MouseDoubleClick" Height="200">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Тренер" DisplayMemberBinding="{Binding Trainer}" Width="250"/>
-                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date}" Width="120"/>
-                    <GridViewColumn Header="Свободное время" DisplayMemberBinding="{Binding Slot}" Width="180"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                <TextBlock Text="Название типа:" Foreground="White"/>
+                <TextBox x:Name="NewMembershipTypeNameBox" Margin="0 5 0 10"/>
+
+                <TextBlock Text="Длительность (мес):" Foreground="White"/>
+                <TextBox x:Name="NewDurationBox" Margin="0 5 0 10"/>
+
+                <Button Content="Добавить тип" Width="180" Padding="8" Click="AddMembershipType_Click"/>
+            </StackPanel>
+        </Grid>
 
     </StackPanel>
-
 </Page>

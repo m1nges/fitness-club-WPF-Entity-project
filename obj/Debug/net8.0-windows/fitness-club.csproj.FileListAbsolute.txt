@@ -640,3 +640,5 @@ E:\fitness-club\obj\Debug\net8.0-windows\Pages\ClientPages\ClientTrainingPlanFro
 E:\fitness-club\obj\Debug\net8.0-windows\Pages\ClientPages\ClientTrainingPlanFromTrainer.baml
 E:\fitness-club\obj\Debug\net8.0-windows\Pages\TrainerPages\TrainerWorkSchedule.g.cs
 E:\fitness-club\obj\Debug\net8.0-windows\Pages\TrainerPages\TrainerWorkSchedule.baml
+E:\fitness-club\obj\Debug\net8.0-windows\Styles.baml
+E:\fitness-club\obj\Debug\net8.0-windows\App.baml

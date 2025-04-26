@@ -5,18 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:fitness_club.Pages.TrainerPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="TrainerWorkSchedule"
-      Background="white">
+      d:DesignHeight="900" d:DesignWidth="800"
+      Title="График работы тренера"
+      Background="{StaticResource GlobalPageBackground}">
+
+    <Page.Resources>
+        <!-- Стиль для DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#E0E0F8"/>
+            <Setter Property="BorderBrush" Value="#8A2BE2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="RowBackground" Value="#D8BFD8"/>
+            <Setter Property="AlternatingRowBackground" Value="#E6E6FA"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#8A2BE2"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#8A2BE2"/>
+        </Style>
+    </Page.Resources>
 
     <StackPanel Margin="20">
-        <TextBlock Text="Ваш график на ближайшие 2 недели" FontSize="20" FontWeight="Bold" Margin="0 0 0 15"/>
+        <TextBlock Text="Ваш график на ближайшие 2 недели" 
+                   FontSize="20" FontWeight="Bold" 
+                   Margin="0 0 0 15"
+                   Foreground="White"/>
 
         <DataGrid x:Name="TrainerScheduleGrid"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   CanUserAddRows="False"
-                  HeadersVisibility="Column"
                   Height="400">
 
             <DataGrid.Columns>

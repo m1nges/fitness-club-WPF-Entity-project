@@ -38,10 +38,11 @@ namespace fitness_club.Pages.ClientPages
             {
                 var membershipTypes = db.MembershipTypes.Where(mt=>mt.MembershipTypeName != "Пробная тренировка").OrderBy(mt=>mt.MembershipTypeId).ToList();
                 membershipDurationCmb.ItemsSource = membershipTypes;
-                membershipDurationCmb.SelectedValue = 1;
                 membershipDurationCmb.DisplayMemberPath = "MembershipTypeName";
                 membershipDurationCmb.SelectedValuePath = "MembershipTypeId";
-                
+                membershipDurationCmb.SelectedValue = 1;
+
+
             }
         }
 
@@ -154,45 +155,19 @@ namespace fitness_club.Pages.ClientPages
         {
             using (var db = new AppDbContext())
             {
-                if (membershipDurationCmb.SelectedIndex == 0)
+                if (membershipDurationCmb.SelectedValue is int selectedTypeId)
                 {
                     var memberships = db.Memberships
                         .Include(m => m.MembershipType)
-                        .Where(m => m.MembershipTypeId == 1)
+                        .Where(m => m.MembershipTypeId == selectedTypeId)
                         .OrderByDescending(m => m.Price)
                         .ToList();
-                    membershipList.ItemsSource = memberships;
-                }
-                else if (membershipDurationCmb.SelectedIndex == 1)
-                {
-                    var memberships = db.Memberships
-                        .Include(m => m.MembershipType)
-                        .Where(m => m.MembershipTypeId == 2)
-                        .OrderByDescending(m => m.Price)
-                        .ToList();
-                    membershipList.ItemsSource = memberships;
-                }
-                else if (membershipDurationCmb.SelectedIndex == 2)
-                {
-                    var memberships = db.Memberships
-                        .Include(m => m.MembershipType)
-                        .Where(m => m.MembershipTypeId == 3)
-                        .OrderByDescending(m => m.Price)
-                        .ToList();
-                    membershipList.ItemsSource = memberships;
-                }
-                else if (membershipDurationCmb.SelectedIndex == 3)
-                {
-                    var memberships = db.Memberships
-                        .Include(m => m.MembershipType)
-                        .Where(m => m.MembershipTypeId == 4)
-                        .OrderByDescending(m => m.Price)
-                        .ToList();
+
                     membershipList.ItemsSource = memberships;
                 }
             }
-
         }
+
 
         private void membershipDurationCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -9,7 +9,7 @@
       Title="ClientEquipmentGuidePage">
 
     <ScrollViewer
-              Background="White"
+              Background="{StaticResource GlobalPageBackground}"
               Padding="20"
               VerticalScrollBarVisibility="Auto">
 

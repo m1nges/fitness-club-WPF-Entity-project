@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
       mc:Ignorable="d" 
       d:DesignHeight="433.558" d:DesignWidth="800"
-      Background="white"
+      Background="{StaticResource GlobalPageBackground}"
       Title="ClientProfilePage">
 
     <Grid>

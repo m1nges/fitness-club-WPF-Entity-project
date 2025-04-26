@@ -5,190 +5,162 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Background="white"
-      Title="Страница оплаты">
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Background="{StaticResource GlobalPageBackground}"
+      Title="ClientPaymentPage">
 
-    <Grid>
+    <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="Страница оплаты" 
-           FontSize="24" 
-           HorizontalAlignment="Center" 
-           VerticalAlignment="Top" 
-           Margin="0,0,0,0" 
-           FontWeight="Bold"/>
-        
-        <!--Услуги к оплате-->
-        <StackPanel Grid.Column="0" Grid.Row="1" Margin="10" Width="Auto">
-            <TextBlock x:Name="servicesToBeProceedTb" Text="Услуги к оплате" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-            <ListView x:Name="unPayedServicesList"
-                    MaxHeight="300"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    HorizontalContentAlignment="Stretch"
-                    Margin="0 0 0 10"
-                    SelectionMode="Single">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
+
+        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" 
+                   Text="Страница оплаты" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Margin="0 0 0 20"/>
+
+        <!-- Услуги к оплате -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="10">
+            <TextBlock x:Name="servicesToBeProceedTb" Text="Услуги к оплате" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+
+            <ListView x:Name="unPayedServicesList" MaxHeight="300" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Margin" Value="0 2"/>
+                        <Setter Property="Margin" Value="0 5"/>
                         <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderBrush" Value="LightGray"/>
-                        <Setter Property="BorderThickness" Value="1"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="blue"/>
+                                <Setter Property="Background" Value="#7B68EE"/>
+                                <Setter Property="Foreground" Value="Black"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
+                        <Border BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="8" Background="#E0E0F8" Padding="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                    <TextBlock Text="{Binding ServiceName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding ServiceType, StringFormat='Тип услуги: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" TextWrapping="Wrap" Margin="0,2,0,0"/>
-                                    <TextBlock Text="{Binding ProvisionDate, StringFormat='Дата оказания услуги: {0:dd.MM.yyyy}'}" Margin="0,2,0,0"/>
+                                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                    <TextBlock Text="{Binding ServiceName}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock Text="{Binding ServiceType, StringFormat='Тип услуги: {0}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding ProvisionDate, StringFormat='Дата оказания: {0:dd.MM.yyyy}'}" Margin="0,2,0,0"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                                    <Button x:Name="payService" Click="payService_Click" Width="90">
-                                        <TextBlock Text="{Binding Price, StringFormat = 'К оплате: {0}'}" Margin="0,2,0,0"/>
-                                    </Button>
-                                </StackPanel>
+                                <Button x:Name="payService" Click="payService_Click" Width="130" Height="34" Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Price, StringFormat='К оплате: {0}₽'}"/>
+                                </Button>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="payForAllServicesDebts" Click="payForAllServicesDebts_Click" Content="Оплатить все" Width="150">
-            </Button>
+
+            <Button x:Name="payForAllServicesDebts" Content="Оплатить все" Click="payForAllServicesDebts_Click" Width="180" Margin="0 10 0 0"/>
         </StackPanel>
-        
-        <!--Абонементы к оплате-->
-        <StackPanel Grid.Column="1" Grid.Row="1" Margin="10" Width="Auto">
-            <TextBlock x:Name="membershipsToBeProceedTb" Text="Абонементы к оплате" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-            <ListView x:Name="unPayedMembershipList"
-            MaxHeight="300"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            HorizontalContentAlignment="Stretch"
-            Margin="0 0 0 10"
-            SelectionMode="Single">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
+
+        <!-- Абонементы к оплате -->
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
+            <TextBlock x:Name="membershipsToBeProceedTb" Text="Абонементы к оплате" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+
+            <ListView x:Name="unPayedMembershipList" MaxHeight="300" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Margin" Value="0 2"/>
+                        <Setter Property="Margin" Value="0 5"/>
                         <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderBrush" Value="LightGray"/>
-                        <Setter Property="BorderThickness" Value="1"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="blue"/>
+                                <Setter Property="Background" Value="#7B68EE"/>
+                                <Setter Property="Foreground" Value="Black"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
+                        <Border BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="8" Background="#E0E0F8" Padding="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                    <TextBlock Text="{Binding MembershipName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding MembershipTypeName, StringFormat='Тип услуги: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding StartDate, StringFormat='Дата начала: {0:dd.MM.yyyy}'}" TextWrapping="Wrap" Margin="0,2,0,0"/>
-                                    <TextBlock Text="{Binding EndDate, StringFormat='Дата окончания: {0:dd.MM.yyyy}'}" Margin="0,2,0,0"/>
+                                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                    <TextBlock Text="{Binding MembershipName}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock Text="{Binding MembershipTypeName, StringFormat='Тип: {0}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding StartDate, StringFormat='Начало: {0:dd.MM.yyyy}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding EndDate, StringFormat='Конец: {0:dd.MM.yyyy}'}" Margin="0,2,0,0"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                                    <Button x:Name="payMembership" Click="payMembership_Click" Width="90">
-                                        <TextBlock Text="{Binding Price, StringFormat = 'К оплате: {0}'}" Margin="0,2,0,0"/>
-                                    </Button>
-                                </StackPanel>
+                                <Button x:Name="payMembership" Click="payMembership_Click" Width="130" Height="34" Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Price, StringFormat='К оплате: {0}₽'}"/>
+                                </Button>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="payForAllMembershipDebts" Click="payForAllMembershipDebts_Click" Content="Оплатить все" Width="150">
-            </Button>
+
+            <Button x:Name="payForAllMembershipDebts" Content="Оплатить все" Click="payForAllMembershipDebts_Click" Width="180" Margin="0 10 0 0"/>
         </StackPanel>
 
+        <!-- Занятия к оплате -->
         <StackPanel Grid.Column="0" Grid.Row="2" Margin="10">
-            <TextBlock x:Name="classTitle" Text="Занятия к оплате" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBlock x:Name="classTitle" Text="Занятия к оплате" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
 
-            <ListView x:Name="unPayedClassList" 
-                    MaxHeight="300"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    HorizontalContentAlignment="Stretch"
-                    Margin="0 0 0 10"
-                    SelectionMode="Single">
+            <ListView x:Name="unPayedClassList" MaxHeight="300" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White">
+                        <Border BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="8" Background="#E0E0F8" Padding="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                    <TextBlock Text="{Binding ClassName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" Margin="0,5,0,0" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding TrainerName, StringFormat='Тренер: {0}'}" Margin="0,2,0,0" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Date, StringFormat='Дата: {0:dd.MM.yyyy}'}"  TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding StartTime, StringFormat='Время: {0:hh\\:mm}'}" TextWrapping="Wrap"/>
+                                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                    <TextBlock Text="{Binding ClassName}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding TrainerName, StringFormat='Тренер: {0}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding Date, StringFormat='Дата: {0:dd.MM.yyyy}'}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding StartTime, StringFormat='Время: {0:hh\\:mm}'}" Margin="0,2,0,0"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                                    <Button Content="{Binding Price, StringFormat='К оплате: {0}₽'}"
-                                    Click="payClass_Click"
-                                    Tag="{Binding ClassId}" Width="100"/>
-                                </StackPanel>
+                                <Button Content="{Binding Price, StringFormat='К оплате: {0}₽'}" Tag="{Binding ClassId}" Click="payClass_Click"
+                                        Width="130" Height="34" Grid.Column="1" VerticalAlignment="Center"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="payAllClassesBtn" Click="payAllClassesBtn_Click" Content="Оплатить все занятия" Width="150"/>
+            <Button x:Name="payAllClassesBtn" Content="Оплатить все занятия" Click="payAllClassesBtn_Click" Width="180" Margin="0 10 0 0"/>
         </StackPanel>
 
+        <!-- Шкафчики -->
+        <StackPanel Grid.Column="1" Grid.Row="2" Margin="10">
+            <TextBlock x:Name="lockerTitle" Text="Шкафчик к оплате" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
 
-        <StackPanel x:Name="lockerPaymentPanelWrap" Grid.Column="1" Grid.Row="2" Margin="10" Width="Auto">
-            <TextBlock x:Name="lockerTitle" Text="Шкафчик к оплате" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
             <StackPanel x:Name="lockerPaymentPanel" Margin="10" Width="Auto">
-
                 <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Background="White" MaxWidth="500">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -199,12 +171,12 @@
                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
                             <TextBlock Text="{Binding LockerId, StringFormat='Номер ячейки: {0}'}" FontWeight="Bold" FontSize="14"/>
                             <TextBlock Text="{Binding LockerZone, StringFormat='Зона: {0}'}" Margin="0,5,0,0"/>
-                            <TextBlock Text="{Binding StartDate, StringFormat='С: {0:dd.MM.yyyy}'}" />
-                            <TextBlock Text="{Binding EndDate, StringFormat='По: {0:dd.MM.yyyy}'}" />
+                            <TextBlock Text="{Binding StartDate, StringFormat='С: {0:dd.MM.yyyy}'}"/>
+                            <TextBlock Text="{Binding EndDate, StringFormat='По: {0:dd.MM.yyyy}'}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <Button x:Name="payLockerBtn" Click="payLockerBtn_Click" Width="90">
+                            <Button x:Name="payLockerBtn" Click="payLockerBtn_Click" Width="150" Height="30">
                                 <TextBlock Text="{Binding RentPrice, StringFormat='К оплате: {0}₽'}"/>
                             </Button>
                         </StackPanel>

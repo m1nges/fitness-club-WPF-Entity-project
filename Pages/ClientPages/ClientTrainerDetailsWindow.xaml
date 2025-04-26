@@ -5,22 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club.Pages.ClientPages"
         mc:Ignorable="d"
-        Title="ClientTrainerDetailsWindow" Height="900" Width="1200">
-    <Grid>
+        Title="ClientTrainerDetailsWindow"
+        Height="900" Width="1200"
+        d:Height="900" d:Width="1200"
+        Background="{StaticResource GlobalPageBackground}"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="2" x:Name="trainerFullNameTb" Text="Полное имя тренера" FontSize="24" FontWeight="Bold" Margin="0 25 0 25" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.ColumnSpan="2" x:Name="trainerFullNameTb"
+                   Text="Полное имя тренера"
+                   FontSize="26" FontWeight="Bold"
+                   Foreground="White"
+                   Margin="0 25 0 25"
+                   HorizontalAlignment="Center"/>
+
+        <!-- Левая часть -->
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="10">
-            <Image x:Name="trainerPhoto" Height="360" Width="360" Margin="0 10 0 10"/>
+            <Border BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="12" Background="#E0E0F8">
+                <Image x:Name="trainerPhoto" Height="360" Width="360" Stretch="UniformToFill" Margin="5"/>
+            </Border>
+
             <StackPanel x:Name="sendReviewSP" Margin="0 20 0 0">
-                <TextBlock x:Name="reviewsBlockTb" Text="Оставьте свой отзыв о тренере" FontSize="20" TextWrapping="Wrap" FontWeight="Bold" Margin="10 0 0 0"/>
-                <TextBox TextChanged="reviewTextBox_TextChanged" x:Name="reviewTextBox" Margin="10 15 10 0" MinHeight="70" MaxHeight="100" VerticalScrollBarVisibility="Auto"/>
+                <TextBlock x:Name="reviewsBlockTb" Text="Оставьте свой отзыв о тренере" TextWrapping="Wrap"
+                           FontSize="20" FontWeight="Bold" Foreground="White" Margin="10 0 0 0"/>
+
+                <Border BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="8" Background="#E0E0F8" Margin="10 15 10 0">
+                    <TextBox TextChanged="reviewTextBox_TextChanged" x:Name="reviewTextBox"
+                             MinHeight="70" MaxHeight="100"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderThickness="0" Background="Transparent" Padding="5" Foreground="Black"/>
+                </Border>
+
                 <StackPanel Margin="10 10 0 0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal" x:Name="StarPanel">
                         <Path Name="Star1" Tag="1" MouseEnter="Star_MouseEnter" MouseLeave="Star_MouseLeave" MouseLeftButtonDown="Star_MouseLeftButtonDown"
@@ -40,37 +64,55 @@
                             Width="20" Height="20" Fill="Gray" Margin="5"/>
                     </StackPanel>
                 </StackPanel>
-                <Button x:Name="submitReviewButton" Content="Отправить отзыв" Margin="10 15 0 0" Width="150" FontSize="18" Click="SubmitReviewButton_Click"/>
+
+                <Button x:Name="submitReviewButton" Content="Отправить отзыв"
+                        Width="180" FontSize="18"
+                        Margin="10 15 0 0"
+                        Click="SubmitReviewButton_Click"
+                        Background="#7B68EE" Foreground="White" BorderBrush="#8A2BE2" BorderThickness="2" 
+                        Padding="5" FontWeight="Bold"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <StackPanel Orientation="Vertical">
-                <TextBlock x:Name="trainerSpecializationTb" Text="Специализация тренера" FontSize="24" FontWeight="bold" Margin="10 0 0 0"/>
-                <TextBlock x:Name="trainerExperienceTb" Text="Стаж работы тренера" FontSize="24" FontWeight="bold" Margin="10 20 0 0"/>
-                <TextBlock x:Name="trainerAgeTb" Text="Возраст тренера:" FontSize="24" FontWeight="bold" Margin="10 20 0 0"/>
-                <TextBlock x:Name="trainerPhoneTb" Text="Номер телефона тренера:" FontSize="24" FontWeight="bold" Margin="10 20 0 0"/>
-                <TextBlock x:Name="individualPriceTb" Text="Цена персональной тренировки(час):" FontSize="24" FontWeight="bold" Margin="10 20 0 0"/>
-            </StackPanel>
-            <StackPanel x:Name="reviewsSP" Margin="0 100 0 0">
-                <TextBlock Text="Отзывы клиентов о тренере" FontSize="24" FontWeight="bold" Margin="10 0 0 0"/>
-                <TextBlock x:Name="avgTrainerRating" Text="Средняя оценка тренера" FontSize="24" FontWeight="bold" Margin="10 20 0 0"/>
-                <Border Background="#DDD" Margin="10 15 10 10" Padding="10">
+
+        <!-- Правая часть -->
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
+            <TextBlock x:Name="trainerSpecializationTb" Text="Специализация тренера"
+                       FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 0 0 10"/>
+
+            <TextBlock x:Name="trainerExperienceTb" Text="Стаж работы тренера"
+                       FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 10 0 10"/>
+
+            <TextBlock x:Name="trainerAgeTb" Text="Возраст тренера:"
+                       FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 10 0 10"/>
+
+            <TextBlock x:Name="trainerPhoneTb" Text="Номер телефона тренера:"
+                       FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 10 0 10"/>
+
+            <TextBlock x:Name="individualPriceTb" Text="Цена персональной тренировки (час):"
+                       FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 10 0 10"/>
+
+            <StackPanel x:Name="reviewsSP" Margin="0 50 0 0">
+                <TextBlock Text="Отзывы клиентов о тренере"
+                           FontSize="22" FontWeight="Bold" Foreground="White" Margin="0 0 0 10"/>
+
+                <TextBlock x:Name="avgTrainerRating" Text="Средняя оценка тренера"
+                           FontSize="20" FontWeight="Bold" Foreground="White" Margin="0 10 0 10"/>
+
+                <Border Background="#E0E0F8" BorderBrush="#8A2BE2" BorderThickness="2" CornerRadius="8" Padding="10">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="400">
-                        <StackPanel>
-                            <ListView x:Name="reviewsListView" Margin="0 5 0 0">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                                            <TextBlock Text="{Binding ClientName, StringFormat={} Автор: {0} | }"/>
-                                            <TextBlock Text=" Отзыв: " FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding ReviewContent}"/>
-                                            <TextBlock Text=" Оценка: " FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding ReviewGrade}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
+                        <ListView x:Name="reviewsListView" Margin="0 5 0 0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                        <TextBlock Text="{Binding ClientName, StringFormat={}Автор: {0} | }" Foreground="Black"/>
+                                        <TextBlock Text="Отзыв: " FontWeight="Bold" Foreground="Black"/>
+                                        <TextBlock Text="{Binding ReviewContent}" Foreground="Black"/>
+                                        <TextBlock Text="Оценка: " FontWeight="Bold" Foreground="Black"/>
+                                        <TextBlock Text="{Binding ReviewGrade}" Foreground="Black"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </ScrollViewer>
                 </Border>
             </StackPanel>

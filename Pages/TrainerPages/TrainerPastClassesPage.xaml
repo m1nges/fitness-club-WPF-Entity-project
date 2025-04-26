@@ -6,31 +6,66 @@
       xmlns:local="clr-namespace:fitness_club.Pages.TrainerPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TrainerPastClassesPage"
-      Background="white">
-    
-    <ScrollViewer HorizontalScrollBarVisibility="Hidden">
-        <StackPanel Margin="10">
-            <TextBlock Text="Проведенные занятия" FontSize="20" FontWeight="Bold" Margin="0 0 0 10"/>
+      Title="Проведённые занятия"
+      Background="{StaticResource GlobalPageBackground}">
 
-            <ComboBox x:Name="FilterComboBox" SelectionChanged="FilterComboBox_SelectionChanged"
-              Width="200" Margin="0 0 0 10">
+    <Page.Resources>
+        <!-- Стиль для ComboBox -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#5E03FC"/>
+            <Setter Property="BorderBrush" Value="#8A2BE2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0 0 0 10"/>
+        </Style>
+
+        <!-- Стиль для ListViewItem -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="Margin" Value="0 5 0 5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#E0E0F8"/>
+            <Setter Property="BorderBrush" Value="#8A2BE2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#7B68EE"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden">
+        <StackPanel Margin="20">
+            <TextBlock Text="Проведенные занятия" 
+                       FontSize="20" FontWeight="Bold" 
+                       Margin="0 0 0 10" 
+                       Foreground="White"/>
+
+            <ComboBox x:Name="FilterComboBox" 
+                      SelectionChanged="FilterComboBox_SelectionChanged"
+                      Width="200">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Только отмеченные"/>
                 <ComboBoxItem Content="Только неотмеченные"/>
             </ComboBox>
 
-            <ListView x:Name="PastClassesListView" MouseDoubleClick="PastClassesListView_MouseDoubleClick" HorizontalContentAlignment="Stretch">
+            <ListView x:Name="PastClassesListView" 
+                      MouseDoubleClick="PastClassesListView_MouseDoubleClick"
+                      HorizontalContentAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="8" Margin="0,5">
+                        <Border BorderBrush="#8A2BE2" BorderThickness="1" CornerRadius="8" Padding="8" Background="White" Margin="0,5">
                             <StackPanel>
-                                <TextBlock Text="{Binding ClassName}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Date, StringFormat='Дата: {0:dd.MM.yyyy}'}"/>
-                                <TextBlock Text="{Binding StartTime, StringFormat='Начало: {0:hh\\:mm}'}"/>
-                                <TextBlock Text="{Binding EndTime, StringFormat='Конец: {0:hh\\:mm}'}"/>
-                                <TextBlock Text="{Binding HallName, StringFormat='Зал: {0}'}"/>
-                                <TextBlock Text="{Binding Price, StringFormat='Цена: {0} руб.'}"/>
+                                <TextBlock Text="{Binding ClassName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Date, StringFormat='Дата: {0:dd.MM.yyyy}'}" Margin="0 2 0 0"/>
+                                <TextBlock Text="{Binding StartTime, StringFormat='Начало: {0:hh\\:mm}'}" Margin="0 2 0 0"/>
+                                <TextBlock Text="{Binding EndTime, StringFormat='Конец: {0:hh\\:mm}'}" Margin="0 2 0 0"/>
+                                <TextBlock Text="{Binding HallName, StringFormat='Зал: {0}'}" Margin="0 2 0 0"/>
+                                <TextBlock Text="{Binding Price, StringFormat='Цена: {0} руб.'}" Margin="0 2 0 0"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
